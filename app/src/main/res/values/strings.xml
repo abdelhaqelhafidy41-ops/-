@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">نور المسلم</string>
+    <string name="app_slogan">زادك اليومي من القرآن والأذكار والصلاة</string>
+
+    <!-- Navigation items -->
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_quran">القرآن</string>
+    <string name="nav_adhkar">الأذكار</string>
+    <string name="nav_prayer">الصلاة والقبلة</string>
+    <string name="nav_more">المزيد</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Common UI -->
+    <string name="loading">جاري التحميل...</string>
+    <string name="empty_data_notice">سيتم تحميل وتحديث البيانات عند توفر الاتصال والمصدر الموثوق.</string>
+    <string name="back">رجوع</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="search">بحث</string>
+    <string name="retry">إعادة المحاولة</string>
+
+    <!-- Home Screen -->
+    <string name="home_greeting">السلام عليكم ورحمة الله وبركاته</string>
+    <string name="home_next_prayer">الصلاة القادمة</string>
+    <string name="home_last_read">متابعة القراءة</string>
+    <string name="home_daily_dhikr">ورد اليوم</string>
+    <string name="home_quick_actions">الوصول السريع</string>
+    <string name="home_quran_shortcut">المصحف الشريف</string>
+    <string name="home_adhkar_shortcut">أذكار الصباح والمساء</string>
+    <string name="home_prayer_shortcut">مواقيت الصلاة</string>
+    <string name="home_qibla_shortcut">اتجاه القبلة</string>
+
+    <!-- Quran Screen -->
+    <string name="quran_title">القرآن الكريم</string>
+    <string name="quran_surahs_tab">السور</string>
+    <string name="quran_juz_tab">الأجزاء</string>
+    <string name="quran_bookmarks_tab">الفواصل والمفضلة</string>
+    <string name="quran_empty_state">قاعدة بيانات المصحف الشريف جاهزة وموثقة البنية. سيتم ربط مجمع الملك فهد لطباعة المصحف الشريف في المرحلة القادمة.</string>
+    <string name="quran_last_read_empty">لم يتم حفظ موضع قراءة سابق بعد.</string>
+
+    <!-- Adhkar Screen -->
+    <string name="adhkar_title">حصن المسلم والأذكار</string>
+    <string name="adhkar_morning">أذكار الصباح</string>
+    <string name="adhkar_evening">أذكار المساء</string>
+    <string name="adhkar_sleep">أذكار النوم والاستيقاظ</string>
+    <string name="adhkar_after_prayer">أذكار بعد الصلاة</string>
+    <string name="adhkar_counter_title">السبحة الإلكترونية</string>
+    <string name="adhkar_empty_state">سجل الأذكار والسبحة جاهز لتسجيل تسبيحاتك ووردك اليومي فور تفعيله.</string>
+    <string name="adhkar_increment">تسبيح (+1)</string>
+    <string name="adhkar_reset">إعادة ضبط العداد</string>
+
+    <!-- Prayer Screen -->
+    <string name="prayer_title">مواقيت الصلاة والقبلة</string>
+    <string name="prayer_location_title">تحديد الموقع لمواقيت دقيقة</string>
+    <string name="prayer_location_desc">احصل على مواقيت أذان واتجاه قبلة دقيقين بناءً على موقعك الجغرافي الحالي دون مشاركة بياناتك.</string>
+    <string name="prayer_enable_location">تفعيل إذن الموقع الجغرافي</string>
+    <string name="prayer_location_granted">تم تحديد الموقع بنجاح</string>
+    <string name="prayer_fajr">الفجر</string>
+    <string name="prayer_sunrise">الشروق</string>
+    <string name="prayer_dhuhr">الظهر</string>
+    <string name="prayer_asr">العصر</string>
+    <string name="prayer_maghrib">المغرب</string>
+    <string name="prayer_isha">العشاء</string>
+    <string name="prayer_qibla_tab">اتجاه القبلة</string>
+    <string name="prayer_times_tab">المواقيت</string>
+    <string name="prayer_empty_state">سيتم حساب المواقيت الدقيقة وفق طريقة الحساب المعتمدة بمجرد تحديد المدينة أو تفعيل الموقع.</string>
+
+    <!-- More Screen -->
+    <string name="more_title">المزيد من الخدمات</string>
+    <string name="more_achievements">سجل الإنجازات اليومي</string>
+    <string name="more_favorites">العناصر المفضلة</string>
+    <string name="more_data_sources">مصادر البيانات والتوثيق</string>
+    <string name="more_about">عن تطبيق نور المسلم</string>
+    <string name="more_share">مشاركة التطبيق</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">الإعدادات والتفضيلات</string>
+    <string name="settings_theme_title">مظهر التطبيق</string>
+    <string name="settings_theme_system">تلقائي (حسب النظام)</string>
+    <string name="settings_theme_light">الوضع الفاتح</string>
+    <string name="settings_theme_dark">الوضع الداكن</string>
+    <string name="settings_font_size">حجم الخط</string>
+    <string name="settings_font_normal">افتراضي (100%)</string>
+    <string name="settings_font_medium">متوسط (115%)</string>
+    <string name="settings_font_large">كبير (130%)</string>
+    <string name="settings_font_xlarge">كبير جداً (150%)</string>
+    <string name="settings_language">لغة التطبيق</string>
+    <string name="settings_lang_ar">العربية (Arabic)</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_calc_method">طريقة حساب مواقيت الصلاة</string>
+    <string name="settings_calc_ummalqura">أم القرى (مكة المكرمة)</string>
+    <string name="settings_calc_mwl">رابطة العالم الإسلامي</string>
+    <string name="settings_calc_egypt">الهيئة المصرية العامة للمساحة</string>
+    <string name="settings_calc_isna">الجمعية الإسلامية لأمريكا الشمالية (ISNA)</string>
+    <string name="settings_calc_karachi">جامعة العلوم الإسلامية بكراتشي</string>
+    <string name="settings_madhhab">مذهب حساب صلاة العصر</string>
+    <string name="settings_madhhab_standard">الجمهور (الشافعي، المالكي، الحنبلي)</string>
+    <string name="settings_madhhab_hanafi">الحنفي (مثلان)</string>
+    <string name="settings_notifications">التنبيهات والإشعارات</string>
+    <string name="settings_notifications_enable">تفعيل إشعارات الأذان والورد اليومي</string>
+    <string name="settings_audio_pref">نغمة التنبيه</string>
+    <string name="settings_audio_adhan">الأذان الكامل</string>
+    <string name="settings_audio_takbeer">التكبير فقط</string>
+    <string name="settings_audio_silent">تنبيه صامت / اهتزاز</string>
+</resources>

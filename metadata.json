@@ -1,0 +1,8 @@
+{
+  "name": "نور المسلم",
+  "description": "تطبيق إسلامي شامل: القرآن الكريم تلاوة وحفظاً وختمة، مواقيت الصلاة، الأذكار، والقبلة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

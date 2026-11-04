@@ -1,0 +1,47 @@
+[
+  {"surahNumber": 1, "ayahNumberInSurah": 1, "ayahNumberOverall": 1, "textUthmani": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+  {"surahNumber": 1, "ayahNumberInSurah": 2, "ayahNumberOverall": 2, "textUthmani": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+  {"surahNumber": 1, "ayahNumberInSurah": 3, "ayahNumberOverall": 3, "textUthmani": "الرَّحْمَٰنِ الرَّحِيمِ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+  {"surahNumber": 1, "ayahNumberInSurah": 4, "ayahNumberOverall": 4, "textUthmani": "مَالِكِ يَوْمِ الدِّينِ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+  {"surahNumber": 1, "ayahNumberInSurah": 5, "ayahNumberOverall": 5, "textUthmani": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+  {"surahNumber": 1, "ayahNumberInSurah": 6, "ayahNumberOverall": 6, "textUthmani": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+  {"surahNumber": 1, "ayahNumberInSurah": 7, "ayahNumberOverall": 7, "textUthmani": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ", "pageNumber": 1, "juzNumber": 1, "sajda": false},
+
+
+  {"surahNumber": 103, "ayahNumberInSurah": 1, "ayahNumberOverall": 6178, "textUthmani": "وَالْعَصْرِ", "pageNumber": 601, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 103, "ayahNumberInSurah": 2, "ayahNumberOverall": 6179, "textUthmani": "إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ", "pageNumber": 601, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 103, "ayahNumberInSurah": 3, "ayahNumberOverall": 6180, "textUthmani": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ", "pageNumber": 601, "juzNumber": 30, "sajda": false},
+
+  {"surahNumber": 108, "ayahNumberInSurah": 1, "ayahNumberOverall": 6192, "textUthmani": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ", "pageNumber": 602, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 108, "ayahNumberInSurah": 2, "ayahNumberOverall": 6193, "textUthmani": "فَصَلِّ لِرَبِّكَ وَانْحَرْ", "pageNumber": 602, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 108, "ayahNumberInSurah": 3, "ayahNumberOverall": 6194, "textUthmani": "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ", "pageNumber": 602, "juzNumber": 30, "sajda": false},
+
+  {"surahNumber": 109, "ayahNumberInSurah": 1, "ayahNumberOverall": 6195, "textUthmani": "قُلْ يَا أَيُّهَا الْكَافِرُونَ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 109, "ayahNumberInSurah": 2, "ayahNumberOverall": 6196, "textUthmani": "لَا أَعْبُدُ مَا تَعْبُدُونَ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 109, "ayahNumberInSurah": 3, "ayahNumberOverall": 6197, "textUthmani": "وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 109, "ayahNumberInSurah": 4, "ayahNumberOverall": 6198, "textUthmani": "وَلَا أَنَا عَابِدٌ مَا عَبَدْتُمْ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 109, "ayahNumberInSurah": 5, "ayahNumberOverall": 6199, "textUthmani": "وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 109, "ayahNumberInSurah": 6, "ayahNumberOverall": 6200, "textUthmani": "لَكُمْ دِينُكُمْ وَلِيَ دِينِ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+
+  {"surahNumber": 110, "ayahNumberInSurah": 1, "ayahNumberOverall": 6201, "textUthmani": "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 110, "ayahNumberInSurah": 2, "ayahNumberOverall": 6202, "textUthmani": "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 110, "ayahNumberInSurah": 3, "ayahNumberOverall": 6203, "textUthmani": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ إِنَّهُ كَانَ تَوَّابًا", "pageNumber": 603, "juzNumber": 30, "sajda": false},
+
+  {"surahNumber": 112, "ayahNumberInSurah": 1, "ayahNumberOverall": 6209, "textUthmani": "قُلْ هُوَ اللَّهُ أَحَدٌ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 112, "ayahNumberInSurah": 2, "ayahNumberOverall": 6210, "textUthmani": "اللَّهُ الصَّمَدُ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 112, "ayahNumberInSurah": 3, "ayahNumberOverall": 6211, "textUthmani": "لَمْ يَلِدْ وَلَمْ يُولَدْ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 112, "ayahNumberInSurah": 4, "ayahNumberOverall": 6212, "textUthmani": "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+
+  {"surahNumber": 113, "ayahNumberInSurah": 1, "ayahNumberOverall": 6213, "textUthmani": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 113, "ayahNumberInSurah": 2, "ayahNumberOverall": 6214, "textUthmani": "مِنْ شَرِّ مَا خَلَقَ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 113, "ayahNumberInSurah": 3, "ayahNumberOverall": 6215, "textUthmani": "وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 113, "ayahNumberInSurah": 4, "ayahNumberOverall": 6216, "textUthmani": "وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 113, "ayahNumberInSurah": 5, "ayahNumberOverall": 6217, "textUthmani": "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+
+  {"surahNumber": 114, "ayahNumberInSurah": 1, "ayahNumberOverall": 6218, "textUthmani": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 114, "ayahNumberInSurah": 2, "ayahNumberOverall": 6219, "textUthmani": "مَلِكِ النَّاسِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 114, "ayahNumberInSurah": 3, "ayahNumberOverall": 6220, "textUthmani": "إِلَٰهِ النَّاسِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 114, "ayahNumberInSurah": 4, "ayahNumberOverall": 6221, "textUthmani": "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 114, "ayahNumberInSurah": 5, "ayahNumberOverall": 6222, "textUthmani": "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ", "pageNumber": 604, "juzNumber": 30, "sajda": false},
+  {"surahNumber": 114, "ayahNumberInSurah": 6, "ayahNumberOverall": 6223, "textUthmani": "مِنَ الْجِنَّةِ وَالنَّاسِ", "pageNumber": 604, "juzNumber": 30, "sajda": false}
+]
