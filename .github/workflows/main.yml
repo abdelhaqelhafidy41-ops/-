@@ -65,16 +65,23 @@ jobs:
           fi
 
       - name: Run Unit & Robolectric Tests
-        run: ./gradlew testDebugUnitTest --no-daemon
+        run: |
+          ./gradlew testDebugUnitTest \
+            --no-daemon \
+            --stacktrace \
+            --info
 
       - name: Upload Unit Test Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: unit-test-report
-          path: app/build/reports/tests/testDebugUnitTest/
+          path: |
+            app/build/reports/tests/testDebugUnitTest/
+            app/build/test-results/testDebugUnitTest/
           if-no-files-found: warn
           retention-days: 14
+          
 
       - name: Build Debug APK
         if: success()
