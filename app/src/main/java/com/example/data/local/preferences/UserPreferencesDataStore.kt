@@ -26,11 +26,15 @@ class UserPreferencesDataStore(
     private object PreferencesKeys {
         val THEME_MODE = stringPreferencesKey("theme_mode")
         val FONT_SIZE_SCALE = stringPreferencesKey("font_size_scale")
+        val FONT_FAMILY_TYPE = stringPreferencesKey("font_family_type")
         val LANGUAGE = stringPreferencesKey("language")
         val NOTIFICATIONS_ENABLED = booleanPreferencesKey("notifications_enabled")
         val CALCULATION_METHOD = stringPreferencesKey("calculation_method")
         val MADHHAB = stringPreferencesKey("madhhab")
         val AUDIO_PREFERENCE = stringPreferencesKey("audio_preference")
+        val PREFERRED_RECITER = stringPreferencesKey("preferred_reciter")
+        val VIBRATION_ENABLED = booleanPreferencesKey("vibration_enabled")
+        val DAILY_DHIKR_REMINDER = booleanPreferencesKey("daily_dhikr_reminder")
 
         val LAST_LATITUDE = doublePreferencesKey("last_latitude")
         val LAST_LONGITUDE = doublePreferencesKey("last_longitude")
@@ -71,6 +75,10 @@ class UserPreferencesDataStore(
                 FontSizeScale.valueOf(preferences[PreferencesKeys.FONT_SIZE_SCALE] ?: FontSizeScale.NORMAL.name)
             }.getOrDefault(FontSizeScale.NORMAL)
 
+            val fontFamilyType = runCatching {
+                FontFamilyType.valueOf(preferences[PreferencesKeys.FONT_FAMILY_TYPE] ?: FontFamilyType.CAIRO.name)
+            }.getOrDefault(FontFamilyType.CAIRO)
+
             val language = preferences[PreferencesKeys.LANGUAGE] ?: AppConfig.DEFAULT_LOCALE
             val notificationsEnabled = preferences[PreferencesKeys.NOTIFICATIONS_ENABLED] ?: false
 
@@ -85,6 +93,10 @@ class UserPreferencesDataStore(
             val audioPreference = runCatching {
                 AudioPreference.valueOf(preferences[PreferencesKeys.AUDIO_PREFERENCE] ?: AudioPreference.ADHAN.name)
             }.getOrDefault(AudioPreference.ADHAN)
+
+            val preferredReciter = preferences[PreferencesKeys.PREFERRED_RECITER] ?: "Alafasy_128kbps"
+            val vibrationEnabled = preferences[PreferencesKeys.VIBRATION_ENABLED] ?: true
+            val dailyDhikrReminder = preferences[PreferencesKeys.DAILY_DHIKR_REMINDER] ?: true
 
             val lastLat = preferences[PreferencesKeys.LAST_LATITUDE] ?: 21.4225
             val lastLon = preferences[PreferencesKeys.LAST_LONGITUDE] ?: 39.8262
@@ -110,11 +122,15 @@ class UserPreferencesDataStore(
             UserPreferences(
                 themeMode = themeMode,
                 fontSizeScale = fontSizeScale,
+                fontFamilyType = fontFamilyType,
                 language = language,
                 notificationsEnabled = notificationsEnabled,
                 calculationMethod = calculationMethod,
                 madhhab = madhhab,
                 audioPreference = audioPreference,
+                preferredReciter = preferredReciter,
+                vibrationEnabled = vibrationEnabled,
+                dailyDhikrReminderEnabled = dailyDhikrReminder,
                 lastLatitude = lastLat,
                 lastLongitude = lastLon,
                 lastCityName = lastCity,
@@ -147,6 +163,12 @@ class UserPreferencesDataStore(
         }
     }
 
+    suspend fun updateFontFamilyType(fontFamilyType: FontFamilyType) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.FONT_FAMILY_TYPE] = fontFamilyType.name
+        }
+    }
+
     suspend fun updateLanguage(language: String) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.LANGUAGE] = language
@@ -174,6 +196,24 @@ class UserPreferencesDataStore(
     suspend fun updateAudioPreference(audioPreference: AudioPreference) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.AUDIO_PREFERENCE] = audioPreference.name
+        }
+    }
+
+    suspend fun updatePreferredReciter(reciterId: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.PREFERRED_RECITER] = reciterId
+        }
+    }
+
+    suspend fun updateVibrationEnabled(enabled: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.VIBRATION_ENABLED] = enabled
+        }
+    }
+
+    suspend fun updateDailyDhikrReminderEnabled(enabled: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.DAILY_DHIKR_REMINDER] = enabled
         }
     }
 
@@ -220,6 +260,12 @@ class UserPreferencesDataStore(
             preferences[PreferencesKeys.OFFSET_ASR] = asr
             preferences[PreferencesKeys.OFFSET_MAGHRIB] = maghrib
             preferences[PreferencesKeys.OFFSET_ISHA] = isha
+        }
+    }
+
+    suspend fun resetToDefaults() {
+        dataStore.edit { preferences ->
+            preferences.clear()
         }
     }
 }

@@ -17,6 +17,8 @@ import com.example.data.local.dao.PrayerTimeDao
 import com.example.data.local.dao.QuranDao
 import com.example.data.local.dao.ReadingProgressDao
 import com.example.data.local.dao.UserSettingsDao
+import com.example.data.local.dao.WallpaperDao
+import com.example.data.local.dao.WidgetConfigDao
 import com.example.data.local.entity.DailyAchievementEntity
 import com.example.data.local.entity.DhikrEntity
 import com.example.data.local.entity.DhikrHistoryEntity
@@ -32,6 +34,8 @@ import com.example.data.local.entity.QuranSurahEntity
 import com.example.data.local.entity.ReadingProgressEntity
 import com.example.data.local.entity.TasbeehStateEntity
 import com.example.data.local.entity.UserSettingsEntity
+import com.example.data.local.entity.WallpaperEntity
+import com.example.data.local.entity.WidgetConfigEntity
 
 @Database(
     entities = [
@@ -49,9 +53,11 @@ import com.example.data.local.entity.UserSettingsEntity
         MemorizationEntity::class,
         MemorizationQuizResultEntity::class,
         IslamicLibraryEntity::class,
-        TasbeehStateEntity::class
+        TasbeehStateEntity::class,
+        WallpaperEntity::class,
+        WidgetConfigEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -66,6 +72,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun khatmahDao(): KhatmahDao
     abstract fun memorizationDao(): MemorizationDao
     abstract fun libraryDao(): LibraryDao
+    abstract fun wallpaperDao(): WallpaperDao
+    abstract fun widgetConfigDao(): WidgetConfigDao
 
     companion object {
         @Volatile
@@ -173,6 +181,57 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `wallpapers` (
+                        `id` TEXT PRIMARY KEY NOT NULL,
+                        `titleArabic` TEXT NOT NULL,
+                        `titleEnglish` TEXT,
+                        `category` TEXT NOT NULL,
+                        `imageUrl` TEXT NOT NULL,
+                        `thumbnailUrl` TEXT NOT NULL,
+                        `width` INTEGER NOT NULL,
+                        `height` INTEGER NOT NULL,
+                        `screenTarget` TEXT NOT NULL,
+                        `source` TEXT NOT NULL,
+                        `designerOrAuthor` TEXT NOT NULL,
+                        `licenseType` TEXT NOT NULL,
+                        `attributionText` TEXT NOT NULL,
+                        `isFavorite` INTEGER NOT NULL,
+                        `isDownloaded` INTEGER NOT NULL,
+                        `localFilePath` TEXT,
+                        `createdAt` INTEGER NOT NULL
+                    )
+                    """.trimIndent()
+                )
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_wallpapers_category` ON `wallpapers` (`category`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_wallpapers_isFavorite` ON `wallpapers` (`isFavorite`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_wallpapers_isDownloaded` ON `wallpapers` (`isDownloaded`)")
+
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `widget_configs` (
+                        `appWidgetId` INTEGER PRIMARY KEY NOT NULL,
+                        `widgetType` TEXT NOT NULL,
+                        `cityName` TEXT NOT NULL,
+                        `latitude` REAL NOT NULL,
+                        `longitude` REAL NOT NULL,
+                        `calculationMethod` TEXT NOT NULL,
+                        `madhhab` TEXT NOT NULL,
+                        `themeMode` TEXT NOT NULL,
+                        `showHijriDate` INTEGER NOT NULL,
+                        `preferredReciter` TEXT NOT NULL,
+                        `customPhrase` TEXT NOT NULL,
+                        `fontSizeMultiplier` REAL NOT NULL,
+                        `lastUpdated` INTEGER NOT NULL
+                    )
+                    """.trimIndent()
+                )
+            }
+        }
+
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -180,7 +239,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     AppConfig.DATABASE_NAME
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                     .fallbackToDestructiveMigration(true)
                     .build()
                 INSTANCE = instance

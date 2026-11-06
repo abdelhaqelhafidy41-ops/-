@@ -102,4 +102,7 @@
     <string name="settings_audio_adhan">الأذان الكامل</string>
     <string name="settings_audio_takbeer">التكبير فقط</string>
     <string name="settings_audio_silent">تنبيه صامت / اهتزاز</string>
+    <string name="nav_wallpapers">الخلفيات الإسلامية</string>
+    <string name="wallpapers_subtitle">خلفيات موثقة عالية الدقة ومجانية</string>
+    <string name="widgets_title">الويدجت الإسلامية</string>
 </resources>

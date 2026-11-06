@@ -5,7 +5,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.filled.CompassCalibration
+import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.SelfImprovement
 import androidx.compose.material.icons.filled.Settings
@@ -65,11 +67,25 @@ sealed class Screen(
         unselectedIcon = Icons.Outlined.Settings
     )
 
+    object Statistics : Screen(
+        route = "statistics",
+        titleRes = R.string.more_achievements,
+        selectedIcon = Icons.Filled.EmojiEvents,
+        unselectedIcon = Icons.Filled.EmojiEvents
+    )
+
     object IslamicLibrary : Screen(
         route = "islamic_library",
         titleRes = R.string.nav_more,
         selectedIcon = Icons.AutoMirrored.Filled.MenuBook,
         unselectedIcon = Icons.AutoMirrored.Outlined.MenuBook
+    )
+
+    object Wallpapers : Screen(
+        route = "wallpapers",
+        titleRes = R.string.nav_wallpapers,
+        selectedIcon = Icons.Filled.Image,
+        unselectedIcon = Icons.Filled.Image
     )
 
     object QuranReading : Screen(

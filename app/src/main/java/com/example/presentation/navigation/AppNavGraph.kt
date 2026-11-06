@@ -46,7 +46,8 @@ fun AppNavGraph(
                 viewModel = homeViewModel,
                 onNavigateToQuran = { navController.navigate(Screen.Quran.route) },
                 onNavigateToAdhkar = { navController.navigate(Screen.Adhkar.route) },
-                onNavigateToPrayer = { navController.navigate(Screen.Prayer.route) }
+                onNavigateToPrayer = { navController.navigate(Screen.Prayer.route) },
+                onNavigateToStatistics = { navController.navigate(Screen.Statistics.route) }
             )
         }
 
@@ -106,7 +107,9 @@ fun AppNavGraph(
         composable(Screen.More.route) {
             MoreScreen(
                 onNavigateToSettings = { navController.navigate(Screen.Settings.route) },
-                onNavigateToLibrary = { navController.navigate(Screen.IslamicLibrary.route) }
+                onNavigateToLibrary = { navController.navigate(Screen.IslamicLibrary.route) },
+                onNavigateToStatistics = { navController.navigate(Screen.Statistics.route) },
+                onNavigateToWallpapers = { navController.navigate(Screen.Wallpapers.route) }
             )
         }
 
@@ -117,6 +120,29 @@ fun AppNavGraph(
             com.example.presentation.library.IslamicLibraryScreen(
                 viewModel = libraryViewModel,
                 onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Statistics.route) {
+            val statisticsViewModel: com.example.presentation.statistics.StatisticsViewModel = viewModel(
+                factory = com.example.presentation.statistics.StatisticsViewModel.Factory(appContainer)
+            )
+            com.example.presentation.statistics.StatisticsScreen(
+                viewModel = statisticsViewModel,
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Wallpapers.route) {
+            val wallpapersViewModel: com.example.presentation.wallpapers.WallpapersViewModel = viewModel(
+                factory = com.example.presentation.wallpapers.WallpapersViewModel.provideFactory(
+                    appContainer.wallpaperRepository,
+                    (appContainer as com.example.core.util.DefaultAppContainer).wallpaperDataImporter
+                )
+            )
+            com.example.presentation.wallpapers.WallpapersScreen(
+                viewModel = wallpapersViewModel,
+                onBackClick = { navController.popBackStack() }
             )
         }
 

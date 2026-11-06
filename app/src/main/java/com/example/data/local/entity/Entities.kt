@@ -284,3 +284,55 @@ data class TasbeehStateEntity(
     val lastUpdated: Long = System.currentTimeMillis()
 )
 
+/**
+ * 12. Islamic Wallpaper Entity
+ */
+@Entity(
+    tableName = "wallpapers",
+    indices = [
+        Index(value = ["category"]),
+        Index(value = ["isFavorite"]),
+        Index(value = ["isDownloaded"])
+    ]
+)
+data class WallpaperEntity(
+    @PrimaryKey val id: String,
+    val titleArabic: String,
+    val titleEnglish: String? = null,
+    val category: String, // mosques, kaaba, prophet_mosque, sky_stars, calligraphy, geometry, nature, sea_sunset, quran_verses, adhkar, dark, light, lock_screen, home_screen, ramadan, eid, minimal, tablet
+    val imageUrl: String,
+    val thumbnailUrl: String,
+    val width: Int = 1080,
+    val height: Int = 1920,
+    val screenTarget: String = "both", // "home", "lock", "both"
+    val source: String = "Unsplash",
+    val designerOrAuthor: String = "Islamic Heritage / Open License",
+    val licenseType: String = "Unsplash License",
+    val attributionText: String = "Free for commercial and personal use",
+    val isFavorite: Boolean = false,
+    val isDownloaded: Boolean = false,
+    val localFilePath: String? = null,
+    val createdAt: Long = System.currentTimeMillis()
+)
+
+/**
+ * 13. App Widget Individual Configuration Entity
+ */
+@Entity(tableName = "widget_configs")
+data class WidgetConfigEntity(
+    @PrimaryKey val appWidgetId: Int,
+    val widgetType: String,
+    val cityName: String = "مكة المكرمة",
+    val latitude: Double = 21.4225,
+    val longitude: Double = 39.8262,
+    val calculationMethod: String = "UMM_AL_QURA",
+    val madhhab: String = "STANDARD",
+    val themeMode: String = "SYSTEM",
+    val showHijriDate: Boolean = true,
+    val preferredReciter: String = "Alafasy_128kbps",
+    val customPhrase: String = "سبحان الله وبحمده",
+    val fontSizeMultiplier: Float = 1.0f,
+    val lastUpdated: Long = System.currentTimeMillis()
+)
+
+

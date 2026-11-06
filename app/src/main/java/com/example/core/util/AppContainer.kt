@@ -35,6 +35,8 @@ interface AppContainer {
     val favoritesRepository: FavoritesRepository
     val achievementRepository: AchievementRepository
     val userPreferencesRepository: UserPreferencesRepository
+    val wallpaperRepository: com.example.data.repository.WallpaperRepository
+    val widgetConfigRepository: com.example.data.repository.WidgetConfigRepository
     val locationHelper: com.example.core.location.LocationHelper
     val compassSensorManager: com.example.core.prayer.CompassSensorManager
 }
@@ -112,7 +114,13 @@ class DefaultAppContainer(private val context: Context) : AppContainer {
 
     override val achievementRepository: AchievementRepository by lazy {
         AchievementRepositoryImpl(
-            dailyAchievementDao = database.dailyAchievementDao()
+            dailyAchievementDao = database.dailyAchievementDao(),
+            dhikrDao = database.dhikrDao(),
+            favoriteDao = database.favoriteDao(),
+            readingProgressDao = database.readingProgressDao(),
+            khatmahDao = database.khatmahDao(),
+            memorizationDao = database.memorizationDao(),
+            userPreferencesDataStore = userPreferencesDataStore
         )
     }
 
@@ -120,6 +128,25 @@ class DefaultAppContainer(private val context: Context) : AppContainer {
         UserPreferencesRepositoryImpl(
             dataStore = userPreferencesDataStore,
             userSettingsDao = database.userSettingsDao()
+        )
+    }
+
+    val wallpaperDataImporter: com.example.data.importer.WallpaperDataImporter by lazy {
+        com.example.data.importer.WallpaperDataImporter(
+            context = context,
+            wallpaperDao = database.wallpaperDao()
+        )
+    }
+
+    override val wallpaperRepository: com.example.data.repository.WallpaperRepository by lazy {
+        com.example.data.repository.WallpaperRepositoryImpl(
+            wallpaperDao = database.wallpaperDao()
+        )
+    }
+
+    override val widgetConfigRepository: com.example.data.repository.WidgetConfigRepository by lazy {
+        com.example.data.repository.WidgetConfigRepositoryImpl(
+            widgetConfigDao = database.widgetConfigDao()
         )
     }
 

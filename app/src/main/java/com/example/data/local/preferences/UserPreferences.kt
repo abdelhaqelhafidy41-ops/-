@@ -13,6 +13,12 @@ enum class FontSizeScale(val scale: Float, val labelArabic: String) {
     XLARGE(1.50f, "كبير جداً (150%)")
 }
 
+enum class FontFamilyType(val labelArabic: String) {
+    AMIRI("الخط الأميري (تقليدي)"),
+    CAIRO("خط كايرو (عصري)"),
+    SYSTEM("خط النظام")
+}
+
 enum class CalculationMethod(val id: Int, val labelArabic: String) {
     UMM_AL_QURA(1, "أم القرى (مكة المكرمة)"),
     MUSLIM_WORLD_LEAGUE(2, "رابطة العالم الإسلامي"),
@@ -32,14 +38,32 @@ enum class AudioPreference(val labelArabic: String) {
     SILENT("تنبيه صامت / اهتزاز")
 }
 
+data class ReciterInfo(
+    val id: String,
+    val nameArabic: String,
+    val description: String
+)
+
+val AVAILABLE_RECITERS = listOf(
+    ReciterInfo("Alafasy_128kbps", "مشاري راشد العفاسي", "تلاوة خاشعة بجودة 128 kbps"),
+    ReciterInfo("Husary_128kbps", "محمود خليل الحصري", "المصحف المرتل برواية حفص 128 kbps"),
+    ReciterInfo("AbdulSamad_64kbps_QuranicAudio", "عبد الباسط عبد الصمد", "المصحف المرتل 64 kbps"),
+    ReciterInfo("Ghamadi_40kbps", "سعد الغامدي", "تلاوة كاملة بجودة 40 kbps"),
+    ReciterInfo("Minshawy_Murattal_128kbps", "محمد صديق المنشاوي", "المصحف المرتل 128 kbps")
+)
+
 data class UserPreferences(
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val fontSizeScale: FontSizeScale = FontSizeScale.NORMAL,
+    val fontFamilyType: FontFamilyType = FontFamilyType.CAIRO,
     val language: String = "ar",
     val notificationsEnabled: Boolean = false,
     val calculationMethod: CalculationMethod = CalculationMethod.UMM_AL_QURA,
     val madhhab: Madhhab = Madhhab.STANDARD,
     val audioPreference: AudioPreference = AudioPreference.ADHAN,
+    val preferredReciter: String = "Alafasy_128kbps",
+    val vibrationEnabled: Boolean = true,
+    val dailyDhikrReminderEnabled: Boolean = true,
 
     // Last known coordinates & city
     val lastLatitude: Double = 21.4225, // Default Mecca

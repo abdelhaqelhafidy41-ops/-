@@ -23,6 +23,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.CompassCalibration
+import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Mosque
 import androidx.compose.material.icons.filled.SelfImprovement
@@ -60,6 +61,7 @@ fun HomeScreen(
     onNavigateToQuran: () -> Unit,
     onNavigateToAdhkar: () -> Unit,
     onNavigateToPrayer: () -> Unit,
+    onNavigateToStatistics: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val readingProgress by viewModel.readingProgress.collectAsStateWithLifecycle()
@@ -345,6 +347,17 @@ fun HomeScreen(
                         .testTag("quick_action_qibla")
                 )
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            QuickActionCard(
+                title = "الملف الشخصي وإحصائيات الإنجاز",
+                icon = Icons.Filled.EmojiEvents,
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                onClick = onNavigateToStatistics,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("quick_action_statistics")
+            )
         }
 
         // Last Read Bookmark Card

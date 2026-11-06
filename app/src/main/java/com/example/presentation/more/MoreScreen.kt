@@ -18,8 +18,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
@@ -53,10 +55,13 @@ import com.example.core.config.AppConfig
 fun MoreScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToLibrary: () -> Unit = {},
+    onNavigateToStatistics: () -> Unit = {},
+    onNavigateToWallpapers: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     var showDataSourcesDialog by remember { mutableStateOf(false) }
+    var showWidgetsInfoDialog by remember { mutableStateOf(false) }
     var showAboutDialog by remember { mutableStateOf(false) }
 
     LazyColumn(
@@ -74,6 +79,39 @@ fun MoreScreen(
                 color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(modifier = Modifier.height(6.dp))
+        }
+
+        // Islamic Wallpapers Navigation Card
+        item {
+            MoreMenuCard(
+                title = "الخلفيات الإسلامية",
+                subtitle = "مكتبة متجددة تضم أكثر من 160 خلفية قرآنية وطبيعية وزخارف بدقة عالية",
+                icon = Icons.Filled.Image,
+                onClick = onNavigateToWallpapers,
+                testTag = "more_menu_wallpapers"
+            )
+        }
+
+        // Islamic Widgets Guide Card
+        item {
+            MoreMenuCard(
+                title = "الويدجت الإسلامية للواجهة",
+                subtitle = "أكثر من 35 ويدجت لمواقيت الصلاة، آية اليوم، والمسبحة والقبلة لشاشتك الرئيسية",
+                icon = Icons.Filled.Apps,
+                onClick = { showWidgetsInfoDialog = true },
+                testTag = "more_menu_widgets"
+            )
+        }
+
+        // Profile & Statistics Navigation Card
+        item {
+            MoreMenuCard(
+                title = "الملف الشخصي والإحصائيات",
+                subtitle = "إنجاز اليوم، الاستمرارية، سجل الصلوات المؤداة، والأوراد",
+                icon = Icons.Filled.EmojiEvents,
+                onClick = onNavigateToStatistics,
+                testTag = "more_menu_statistics"
+            )
         }
 
         // Islamic Library Navigation Card
@@ -196,6 +234,54 @@ fun MoreScreen(
             confirmButton = {
                 TextButton(onClick = { showDataSourcesDialog = false }) {
                     Text("إغلاق", fontWeight = FontWeight.Bold)
+                }
+            }
+        )
+    }
+
+    if (showWidgetsInfoDialog) {
+        AlertDialog(
+            onDismissRequest = { showWidgetsInfoDialog = false },
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Filled.Apps,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "دليل الويدجت الإسلامية",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        text = "يوفر تطبيق نور المسلم أكثر من 35 ويدجت ذكية لشاشتك الرئيسية:",
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        text = "• مواقيت الصلاة: الصلاة القادمة، العد التنازلي، والصلوات الخمس.\n• القرآن الكريم: آية اليوم، متابعة موضع القراءة، والختمة اليومية.\n• الأذكار والمسبحة: المسبحة التفاعلية (تسبيح فوري)، أذكار الصباح والمساء.\n• القبلة والتقويم: اتجاه القبلة المباشر والتاريخ الهجري والميلادي.",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "كيف تضيف الويدجت إلى شاشتك؟",
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        text = "1. اضغط مطولاً على أي مساحة فارغة في الشاشة الرئيسية لجهازك.\n2. اختر «الويدجت» أو Widgets.\n3. ابحث عن «نور المسلم» واختر الويدجت بالحجم والمظهر المناسب لك ثم اسحبه إلى الشاشة.",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showWidgetsInfoDialog = false }) {
+                    Text("حسناً فهمت", fontWeight = FontWeight.Bold)
                 }
             }
         )

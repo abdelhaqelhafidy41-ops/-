@@ -41,15 +41,26 @@ class MainActivity : ComponentActivity() {
                         userPrefs
                     )
                 }
+                com.example.widgets.WidgetUpdateCoordinator.updateAllWidgets(this@MainActivity)
             }
 
             // Enforce Arabic RTL support globally
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                 NoorMuslimTheme(
                     themeMode = userPrefs.themeMode,
-                    fontScale = userPrefs.fontSizeScale.scale
+                    fontScale = userPrefs.fontSizeScale.scale,
+                    fontFamilyType = userPrefs.fontFamilyType
                 ) {
                     val navController = rememberNavController()
+
+                    val initialRoute = intent?.getStringExtra("initial_route")
+                    androidx.compose.runtime.LaunchedEffect(initialRoute) {
+                        if (!initialRoute.isNullOrBlank() && initialRoute != "home") {
+                            navController.navigate(initialRoute) {
+                                launchSingleTop = true
+                            }
+                        }
+                    }
 
                     Scaffold(
                         contentWindowInsets = WindowInsets.safeDrawing,

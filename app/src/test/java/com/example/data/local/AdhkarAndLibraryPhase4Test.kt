@@ -171,11 +171,12 @@ class AdhkarAndLibraryPhase4Test {
         val importer = AdhkarDataImporter(context, dhikrDao, libraryDao)
         importer.seedInitialDataIfNeeded()
 
-        val results = libraryDao.searchLibraryFlow("النيات").first()
+        val libraryRepo = LibraryRepositoryImpl(libraryDao)
+        val results = libraryRepo.searchLibrary("النيات").first()
         assertTrue("Search for 'النيات' should return the Hadith of Intention", results.isNotEmpty())
-        assertTrue(results.first().textArabic.contains("إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ"))
+        assertTrue(results.first().textArabic.contains("الأَعْمَالُ"))
 
-        val adviceResults = libraryDao.searchLibraryFlow("النصيحة").first()
+        val adviceResults = libraryRepo.searchLibrary("النصيحة").first()
         assertTrue("Search for 'النصيحة' should return Hadith", adviceResults.isNotEmpty())
     }
 

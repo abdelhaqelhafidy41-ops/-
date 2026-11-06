@@ -18,7 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.AlertDialog
@@ -92,7 +92,7 @@ fun KhatmahCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = if (khatmah.isCompleted) Icons.Filled.CheckCircle else Icons.Filled.MenuBook,
+                        imageVector = if (khatmah.isCompleted) Icons.Filled.CheckCircle else Icons.AutoMirrored.Filled.MenuBook,
                         contentDescription = null,
                         tint = if (khatmah.isCompleted) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(22.dp)

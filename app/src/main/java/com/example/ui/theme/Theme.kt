@@ -9,6 +9,8 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
+import com.example.data.local.preferences.FontFamilyType
 import com.example.data.local.preferences.ThemeMode
 
 private val DarkColorScheme = darkColorScheme(
@@ -57,6 +59,7 @@ private val LightColorScheme = lightColorScheme(
 fun NoorMuslimTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
     fontScale: Float = 1.0f,
+    fontFamilyType: FontFamilyType = FontFamilyType.CAIRO,
     dynamicColor: Boolean = false, // Keep distinct Islamic identity by default
     content: @Composable () -> Unit
 ) {
@@ -76,7 +79,13 @@ fun NoorMuslimTheme(
         else -> LightColorScheme
     }
 
-    val typography = createScalableTypography(fontScale)
+    val selectedFont = when (fontFamilyType) {
+        FontFamilyType.AMIRI -> AmiriFontFamily
+        FontFamilyType.CAIRO -> CairoFontFamily
+        FontFamilyType.SYSTEM -> FontFamily.Default
+    }
+
+    val typography = createScalableTypography(fontScale, selectedFont)
 
     MaterialTheme(
         colorScheme = colorScheme,

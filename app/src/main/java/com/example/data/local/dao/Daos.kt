@@ -21,6 +21,8 @@ import com.example.data.local.entity.QuranSurahEntity
 import com.example.data.local.entity.ReadingProgressEntity
 import com.example.data.local.entity.TasbeehStateEntity
 import com.example.data.local.entity.UserSettingsEntity
+import com.example.data.local.entity.WallpaperEntity
+import com.example.data.local.entity.WidgetConfigEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -54,6 +56,12 @@ interface FavoriteDao {
 
     @Delete
     suspend fun delete(favorite: FavoriteEntity)
+
+    @Query("DELETE FROM favorites")
+    suspend fun clearAllFavorites()
+
+    @Query("SELECT * FROM favorites ORDER BY createdAt DESC")
+    suspend fun getAllFavoritesList(): List<FavoriteEntity>
 }
 
 @Dao
@@ -110,6 +118,15 @@ interface DhikrDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTasbeehState(state: TasbeehStateEntity)
+
+    @Query("DELETE FROM dhikr_history")
+    suspend fun clearDhikrHistory()
+
+    @Query("DELETE FROM tasbeeh_state")
+    suspend fun clearTasbeehState()
+
+    @Query("SELECT * FROM dhikr_history ORDER BY timestamp ASC")
+    suspend fun getAllDhikrHistoryList(): List<DhikrHistoryEntity>
 }
 
 @Dao
@@ -125,6 +142,15 @@ interface DailyAchievementDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveDailyAchievement(achievement: DailyAchievementEntity)
+
+    @Query("DELETE FROM daily_achievements")
+    suspend fun clearAllAchievements()
+
+    @Query("SELECT * FROM daily_achievements ORDER BY dateString ASC")
+    suspend fun getAllAchievementsList(): List<DailyAchievementEntity>
+
+    @Query("SELECT * FROM daily_achievements ORDER BY dateString ASC")
+    fun getAllAchievementsFlow(): Flow<List<DailyAchievementEntity>>
 }
 
 @Dao
@@ -218,6 +244,18 @@ interface KhatmahDao {
 
     @Query("SELECT * FROM khatmah_logs WHERE khatmahId = :khatmahId ORDER BY timestamp DESC")
     fun getLogsForKhatmahFlow(khatmahId: Long): Flow<List<KhatmahLogEntity>>
+
+    @Query("DELETE FROM khatmahs")
+    suspend fun clearAllKhatmahs()
+
+    @Query("DELETE FROM khatmah_logs")
+    suspend fun clearAllKhatmahLogs()
+
+    @Query("SELECT * FROM khatmahs ORDER BY createdAt DESC")
+    suspend fun getAllKhatmahsList(): List<KhatmahEntity>
+
+    @Query("SELECT * FROM khatmah_logs ORDER BY timestamp DESC")
+    suspend fun getAllKhatmahLogsList(): List<KhatmahLogEntity>
 }
 
 @Dao
@@ -245,6 +283,18 @@ interface MemorizationDao {
 
     @Query("SELECT * FROM memorization_quiz_results ORDER BY timestamp DESC LIMIT 50")
     fun getRecentQuizResultsFlow(): Flow<List<MemorizationQuizResultEntity>>
+
+    @Query("DELETE FROM memorization_records")
+    suspend fun clearAllMemorizationRecords()
+
+    @Query("DELETE FROM memorization_quiz_results")
+    suspend fun clearAllQuizResults()
+
+    @Query("SELECT * FROM memorization_records ORDER BY createdAt DESC")
+    suspend fun getAllMemorizationRecordsList(): List<MemorizationEntity>
+
+    @Query("SELECT * FROM memorization_quiz_results ORDER BY timestamp DESC")
+    suspend fun getAllQuizResultsList(): List<MemorizationQuizResultEntity>
 }
 
 @Dao
@@ -267,5 +317,66 @@ interface LibraryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItems(items: List<IslamicLibraryEntity>)
 }
+
+@Dao
+interface WallpaperDao {
+    @Query("SELECT * FROM wallpapers ORDER BY createdAt DESC")
+    fun getAllWallpapersFlow(): Flow<List<WallpaperEntity>>
+
+    @Query("SELECT * FROM wallpapers WHERE category = :category ORDER BY createdAt DESC")
+    fun getWallpapersByCategoryFlow(category: String): Flow<List<WallpaperEntity>>
+
+    @Query("SELECT * FROM wallpapers WHERE titleArabic LIKE '%' || :query || '%' OR titleEnglish LIKE '%' || :query || '%' OR category LIKE '%' || :query || '%' ORDER BY createdAt DESC")
+    fun searchWallpapersFlow(query: String): Flow<List<WallpaperEntity>>
+
+    @Query("SELECT * FROM wallpapers WHERE isFavorite = 1 ORDER BY createdAt DESC")
+    fun getFavoritesFlow(): Flow<List<WallpaperEntity>>
+
+    @Query("SELECT * FROM wallpapers WHERE isDownloaded = 1 ORDER BY createdAt DESC")
+    fun getDownloadedFlow(): Flow<List<WallpaperEntity>>
+
+    @Query("SELECT * FROM wallpapers WHERE id = :id LIMIT 1")
+    suspend fun getWallpaperById(id: String): WallpaperEntity?
+
+    @Query("SELECT COUNT(*) FROM wallpapers")
+    suspend fun getWallpapersCount(): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWallpapers(wallpapers: List<WallpaperEntity>)
+
+    @Update
+    suspend fun updateWallpaper(wallpaper: WallpaperEntity)
+
+    @Query("UPDATE wallpapers SET isFavorite = :isFavorite WHERE id = :id")
+    suspend fun setFavorite(id: String, isFavorite: Boolean)
+
+    @Query("UPDATE wallpapers SET isDownloaded = :isDownloaded, localFilePath = :localFilePath WHERE id = :id")
+    suspend fun setDownloaded(id: String, isDownloaded: Boolean, localFilePath: String?)
+
+    @Query("UPDATE wallpapers SET isDownloaded = 0, localFilePath = NULL WHERE id = :id")
+    suspend fun deleteLocalFile(id: String)
+
+    @Query("DELETE FROM wallpapers")
+    suspend fun clearAllWallpapers()
+}
+
+@Dao
+interface WidgetConfigDao {
+    @Query("SELECT * FROM widget_configs WHERE appWidgetId = :appWidgetId LIMIT 1")
+    suspend fun getConfig(appWidgetId: Int): WidgetConfigEntity?
+
+    @Query("SELECT * FROM widget_configs WHERE appWidgetId = :appWidgetId LIMIT 1")
+    fun getConfigFlow(appWidgetId: Int): Flow<WidgetConfigEntity?>
+
+    @Query("SELECT * FROM widget_configs")
+    suspend fun getAllConfigs(): List<WidgetConfigEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveConfig(config: WidgetConfigEntity)
+
+    @Query("DELETE FROM widget_configs WHERE appWidgetId = :appWidgetId")
+    suspend fun deleteConfig(appWidgetId: Int)
+}
+
 
 
