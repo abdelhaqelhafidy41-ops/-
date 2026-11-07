@@ -67,8 +67,11 @@ android {
     unitTests {
       isIncludeAndroidResources = true
       all {
-        it.systemProperty("robolectric.offline", "true")
-        it.systemProperty("robolectric.dependency.dir", "/tmp/robolectric-deps")
+        val depsDir = file("${rootDir}/.robolectric-deps")
+        if (depsDir.exists() && depsDir.listFiles()?.isNotEmpty() == true) {
+          it.systemProperty("robolectric.offline", "true")
+          it.systemProperty("robolectric.dependency.dir", depsDir.absolutePath)
+        }
       }
     }
   }
