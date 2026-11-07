@@ -6,7 +6,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
-import com.example.MainActivity
 import com.example.NoorMuslimApp
 import com.example.R
 import com.example.core.prayer.HijriCalendarHelper
@@ -29,43 +28,95 @@ object WidgetUpdateCoordinator {
     private val timeFormat12 = SimpleDateFormat("hh:mm a", Locale("ar"))
     private val timeFormat24 = SimpleDateFormat("HH:mm", Locale.US)
 
-    fun updateAllWidgets(context: Context) {
-        val appWidgetManager = AppWidgetManager.getInstance(context) ?: return
+    /**
+     * Fast synchronous view provision for initial drag & drop to prevent "Couldn't add widget."
+     */
+    fun getInitialFastViews(context: Context, providerClass: Class<*>): RemoteViews {
+        return when (providerClass.simpleName) {
+            "NextPrayerWidgetProvider", "PrayerNextWidgetProvider", "PrayerCountdownWidgetProvider", "PrayerFajrCountdownWidgetProvider", "PrayerHighlightCurrentWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_prayer_next)
+            "PrayerTimesDailyWidgetProvider", "PrayerTomorrowWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_prayer_daily)
+            "PrayerMiniWidgetProvider", "PrayerAdhanToggleWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_prayer_mini)
+            "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider", "RamadanPrayerWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_prayer_pair)
+            "AyahOfTheDayWidgetProvider", "QuranAyahOfDayWidgetProvider", "QuranLargeAyahWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_quran_ayah)
+            "LastReadingWidgetProvider", "QuranLastReadWidgetProvider", "QuranResumeWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_quran_last_read)
+            "QuranProgressWidgetProvider", "QuranKhatmahProgressWidgetProvider", "QuranDailyWirdWidgetProvider", "QuranWirdRemainingWidgetProvider", "QuranMemorizationReminderWidgetProvider", "QuranMemorizationProgressWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_quran_khatmah)
+            "QuranPlayerWidgetProvider", "QuranAudioPlayerWidgetProvider", "QuranMiniPlayerWidgetProvider", "QuranCurrentSurahWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_quran_player)
+            "DailyDhikrWidgetProvider", "DhikrOfDayWidgetProvider", "DhikrMorningWidgetProvider", "DhikrEveningWidgetProvider", "DhikrAfterPrayerWidgetProvider", "DhikrLastCompletedWidgetProvider", "DhikrDailyPlanWidgetProvider", "DailyAchievementWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_adhkar_card)
+            "TasbeehCounterWidgetProvider", "TasbeehLargeCounterWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_adhkar_tasbeeh)
+            "QiblaWidgetProvider", "QiblaDirectionWidgetProvider", "QiblaCompassWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_qibla)
+            "HijriDateWidgetProvider", "CombinedDateWidgetProvider", "HijriTimeWidgetProvider", "WeatherPrayerWidgetProvider", "TravelPrayerStatusWidgetProvider", "CityTimezoneWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_date_hijri)
+            "DailyWorshipPlanWidgetProvider", "TodaySummaryWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_summary)
+            "QuickShortcutsWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_shortcuts)
+            else ->
+                RemoteViews(context.packageName, R.layout.widget_prayer_next)
+        }
+    }
+
+    /**
+     * Called directly by BaseIslamicWidgetProvider.onUpdate.
+     * Guarantees immediate RemoteViews binding followed by an asynchronous data update.
+     */
+    fun updateWidgetIds(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray,
+        providerClass: Class<*>
+    ) {
+        // Step 1: Immediate synchronous fallback so Launcher never times out with "Couldn't add widget."
+        try {
+            val fastViews = getInitialFastViews(context, providerClass)
+            for (id in appWidgetIds) {
+                appWidgetManager.updateAppWidget(id, fastViews)
+            }
+        } catch (_: Exception) {}
+
+        // Step 2: Asynchronous complete data bind
         val app = context.applicationContext as? NoorMuslimApp
         val container = app?.container
 
         CoroutineScope(Dispatchers.IO).launch {
-            val userPrefs = container?.userPreferencesDataStore?.userPreferencesFlow?.firstOrNull()
-            val lat = userPrefs?.lastLatitude ?: 21.4225
-            val lon = userPrefs?.lastLongitude ?: 39.8262
-            val cityName = userPrefs?.lastCityName ?: "مكة المكرمة"
-            val method = userPrefs?.calculationMethod ?: CalculationMethod.UMM_AL_QURA
-            val madhhab = userPrefs?.madhhab ?: Madhhab.STANDARD
+            try {
+                val userPrefs = container?.userPreferencesDataStore?.userPreferencesFlow?.firstOrNull()
+                val lat = userPrefs?.lastLatitude ?: 21.4225
+                val lon = userPrefs?.lastLongitude ?: 39.8262
+                val cityName = userPrefs?.lastCityName ?: "مكة المكرمة"
+                val method = userPrefs?.calculationMethod ?: CalculationMethod.UMM_AL_QURA
+                val madhhab = userPrefs?.madhhab ?: Madhhab.STANDARD
 
-            val cal = Calendar.getInstance()
-            val todaySchedule = PrayerCalculator.calculatePrayerTimes(
-                latitude = lat,
-                longitude = lon,
-                date = cal.time,
-                method = method,
-                madhhab = madhhab,
-                cityName = cityName
-            )
-            cal.add(Calendar.DAY_OF_YEAR, 1)
-            val tomorrowSchedule = PrayerCalculator.calculatePrayerTimes(
-                latitude = lat,
-                longitude = lon,
-                date = cal.time,
-                method = method,
-                madhhab = madhhab,
-                cityName = cityName
-            )
+                val cal = Calendar.getInstance()
+                val todaySchedule = PrayerCalculator.calculatePrayerTimes(
+                    latitude = lat,
+                    longitude = lon,
+                    date = cal.time,
+                    method = method,
+                    madhhab = madhhab,
+                    cityName = cityName
+                )
+                cal.add(Calendar.DAY_OF_YEAR, 1)
+                val tomorrowSchedule = PrayerCalculator.calculatePrayerTimes(
+                    latitude = lat,
+                    longitude = lon,
+                    date = cal.time,
+                    method = method,
+                    madhhab = madhhab,
+                    cityName = cityName
+                )
 
-            // Loop through all registered widget provider classes and update their views
-            for (providerClass in allProviderClasses) {
-                val component = ComponentName(context, providerClass)
-                val widgetIds = appWidgetManager.getAppWidgetIds(component)
-                for (id in widgetIds) {
+                for (id in appWidgetIds) {
                     val views = buildViewsForProvider(
                         context = context,
                         appWidgetId = id,
@@ -78,6 +129,65 @@ object WidgetUpdateCoordinator {
                     )
                     appWidgetManager.updateAppWidget(id, views)
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun updateAllWidgets(context: Context) {
+        val appWidgetManager = AppWidgetManager.getInstance(context) ?: return
+        val app = context.applicationContext as? NoorMuslimApp
+        val container = app?.container
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val userPrefs = container?.userPreferencesDataStore?.userPreferencesFlow?.firstOrNull()
+                val lat = userPrefs?.lastLatitude ?: 21.4225
+                val lon = userPrefs?.lastLongitude ?: 39.8262
+                val cityName = userPrefs?.lastCityName ?: "مكة المكرمة"
+                val method = userPrefs?.calculationMethod ?: CalculationMethod.UMM_AL_QURA
+                val madhhab = userPrefs?.madhhab ?: Madhhab.STANDARD
+
+                val cal = Calendar.getInstance()
+                val todaySchedule = PrayerCalculator.calculatePrayerTimes(
+                    latitude = lat,
+                    longitude = lon,
+                    date = cal.time,
+                    method = method,
+                    madhhab = madhhab,
+                    cityName = cityName
+                )
+                cal.add(Calendar.DAY_OF_YEAR, 1)
+                val tomorrowSchedule = PrayerCalculator.calculatePrayerTimes(
+                    latitude = lat,
+                    longitude = lon,
+                    date = cal.time,
+                    method = method,
+                    madhhab = madhhab,
+                    cityName = cityName
+                )
+
+                // Loop through all registered widget provider classes and update their views
+                for (providerClass in allProviderClasses) {
+                    val component = ComponentName(context, providerClass)
+                    val widgetIds = appWidgetManager.getAppWidgetIds(component)
+                    for (id in widgetIds) {
+                        val views = buildViewsForProvider(
+                            context = context,
+                            appWidgetId = id,
+                            providerClass = providerClass,
+                            todaySchedule = todaySchedule,
+                            tomorrowSchedule = tomorrowSchedule,
+                            lat = lat,
+                            lon = lon,
+                            cityName = cityName
+                        )
+                        appWidgetManager.updateAppWidget(id, views)
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
@@ -100,7 +210,7 @@ object WidgetUpdateCoordinator {
 
         return when (providerClass.simpleName) {
             // 1. Prayer Family
-            "PrayerNextWidgetProvider", "PrayerCountdownWidgetProvider", "PrayerFajrCountdownWidgetProvider", "PrayerHighlightCurrentWidgetProvider" -> {
+            "NextPrayerWidgetProvider", "PrayerNextWidgetProvider", "PrayerCountdownWidgetProvider", "PrayerFajrCountdownWidgetProvider", "PrayerHighlightCurrentWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_prayer_next)
                 val isFajr = providerClass.simpleName == "PrayerFajrCountdownWidgetProvider"
                 val prayerName = if (isFajr) "الفجر" else nextPrayer.prayerNameArabic
@@ -144,10 +254,10 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" -> {
+            "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider", "RamadanPrayerWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_prayer_pair)
                 when (providerClass.simpleName) {
-                    "PrayerFajrSunriseWidgetProvider" -> {
+                    "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider" -> {
                         views.setTextViewText(R.id.tv_pair_label1, "الفجر 🌅")
                         views.setTextViewText(R.id.tv_pair_time1, timeFormat12.format(todaySchedule.fajr))
                         views.setTextViewText(R.id.tv_pair_label2, "الشروق ☀️")
@@ -177,7 +287,7 @@ object WidgetUpdateCoordinator {
             }
 
             // 2. Quran Family
-            "QuranAyahOfDayWidgetProvider", "QuranLargeAyahWidgetProvider" -> {
+            "AyahOfTheDayWidgetProvider", "QuranAyahOfDayWidgetProvider", "QuranLargeAyahWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_quran_ayah)
                 val ayahDayList = listOf(
                     Triple("﴿ إِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾", "سورة الشرح - الآية ٦", "فإن مع المشقة سهولة ويسراً"),
@@ -194,7 +304,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "QuranLastReadWidgetProvider", "QuranResumeWidgetProvider" -> {
+            "LastReadingWidgetProvider", "QuranLastReadWidgetProvider", "QuranResumeWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_quran_last_read)
                 val progress = container?.database?.readingProgressDao()?.getReadingProgress()
                 val surahName = progress?.surahNameArabic ?: "سورة البقرة"
@@ -208,7 +318,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "QuranKhatmahProgressWidgetProvider", "QuranDailyWirdWidgetProvider", "QuranWirdRemainingWidgetProvider", "QuranMemorizationReminderWidgetProvider", "QuranMemorizationProgressWidgetProvider" -> {
+            "QuranProgressWidgetProvider", "QuranKhatmahProgressWidgetProvider", "QuranDailyWirdWidgetProvider", "QuranWirdRemainingWidgetProvider", "QuranMemorizationReminderWidgetProvider", "QuranMemorizationProgressWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_quran_khatmah)
                 val khatmahs = container?.database?.khatmahDao()?.getAllKhatmahsList() ?: emptyList()
                 val active = khatmahs.firstOrNull()
@@ -224,7 +334,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "QuranAudioPlayerWidgetProvider", "QuranMiniPlayerWidgetProvider", "QuranCurrentSurahWidgetProvider" -> {
+            "QuranPlayerWidgetProvider", "QuranAudioPlayerWidgetProvider", "QuranMiniPlayerWidgetProvider", "QuranCurrentSurahWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_quran_player)
                 val playerState = container?.audioPlayer?.state?.value
                 val isPlaying = playerState?.isPlaying == true
@@ -256,7 +366,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "DhikrOfDayWidgetProvider", "DhikrMorningWidgetProvider", "DhikrEveningWidgetProvider", "DhikrAfterPrayerWidgetProvider", "DhikrLastCompletedWidgetProvider", "DhikrDailyPlanWidgetProvider", "DailyAchievementWidgetProvider" -> {
+            "DailyDhikrWidgetProvider", "DhikrOfDayWidgetProvider", "DhikrMorningWidgetProvider", "DhikrEveningWidgetProvider", "DhikrAfterPrayerWidgetProvider", "DhikrLastCompletedWidgetProvider", "DhikrDailyPlanWidgetProvider", "DailyAchievementWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_adhkar_card)
                 val isMorning = providerClass.simpleName == "DhikrMorningWidgetProvider"
                 val isEvening = providerClass.simpleName == "DhikrEveningWidgetProvider"
@@ -288,7 +398,7 @@ object WidgetUpdateCoordinator {
             }
 
             // 4. Qibla & Utilities Family
-            "QiblaDirectionWidgetProvider", "QiblaCompassWidgetProvider" -> {
+            "QiblaWidgetProvider", "QiblaDirectionWidgetProvider", "QiblaCompassWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_qibla)
                 val bearing = QiblaHelper.calculateQiblaBearing(lat, lon)
                 val dist = QiblaHelper.calculateDistanceToKaabaKm(lat, lon).toInt()
@@ -298,7 +408,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "HijriDateWidgetProvider", "CombinedDateWidgetProvider", "HijriTimeWidgetProvider", "WeatherPrayerWidgetProvider", "TravelPrayerStatusWidgetProvider", "CityTimezoneWidgetProvider", "DailyWorshipPlanWidgetProvider" -> {
+            "HijriDateWidgetProvider", "CombinedDateWidgetProvider", "HijriTimeWidgetProvider", "WeatherPrayerWidgetProvider", "TravelPrayerStatusWidgetProvider", "CityTimezoneWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_date_hijri)
                 views.setTextViewText(R.id.tv_date_day_name, "يوم ${HijriCalendarHelper.getHijriDate().formattedArabic.split("،").firstOrNull() ?: "اليوم المبارك"}")
                 views.setTextViewText(R.id.tv_date_hijri, hijriDate.formattedArabic)
@@ -307,7 +417,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "TodaySummaryWidgetProvider" -> {
+            "DailyWorshipPlanWidgetProvider", "TodaySummaryWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_summary)
                 val todayStr = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
                 val achievement = container?.database?.dailyAchievementDao()?.getAchievementForDate(todayStr)
@@ -376,56 +486,27 @@ object WidgetUpdateCoordinator {
     }
 
     val allProviderClasses: List<Class<*>> = listOf(
-        // Prayer Family (12)
-        PrayerNextWidgetProvider::class.java,
-        PrayerCountdownWidgetProvider::class.java,
+        // 1. Prayer Family (5)
+        NextPrayerWidgetProvider::class.java,
         PrayerTimesDailyWidgetProvider::class.java,
         PrayerMiniWidgetProvider::class.java,
-        PrayerFajrCountdownWidgetProvider::class.java,
-        PrayerHighlightCurrentWidgetProvider::class.java,
-        PrayerFajrSunriseWidgetProvider::class.java,
-        PrayerDhuhrAsrWidgetProvider::class.java,
-        PrayerMaghribIshaWidgetProvider::class.java,
-        PrayerTomorrowWidgetProvider::class.java,
-        PrayerRamadanImsakIftarWidgetProvider::class.java,
-        PrayerAdhanToggleWidgetProvider::class.java,
+        PrayerPairWidgetProvider::class.java,
+        RamadanPrayerWidgetProvider::class.java,
 
-        // Quran Family (12)
-        QuranAyahOfDayWidgetProvider::class.java,
-        QuranLargeAyahWidgetProvider::class.java,
-        QuranLastReadWidgetProvider::class.java,
-        QuranResumeWidgetProvider::class.java,
-        QuranKhatmahProgressWidgetProvider::class.java,
-        QuranDailyWirdWidgetProvider::class.java,
-        QuranWirdRemainingWidgetProvider::class.java,
-        QuranAudioPlayerWidgetProvider::class.java,
-        QuranMiniPlayerWidgetProvider::class.java,
-        QuranCurrentSurahWidgetProvider::class.java,
-        QuranMemorizationReminderWidgetProvider::class.java,
-        QuranMemorizationProgressWidgetProvider::class.java,
+        // 2. Quran Family (4)
+        AyahOfTheDayWidgetProvider::class.java,
+        LastReadingWidgetProvider::class.java,
+        QuranProgressWidgetProvider::class.java,
+        QuranPlayerWidgetProvider::class.java,
 
-        // Adhkar Family (9)
-        DhikrOfDayWidgetProvider::class.java,
-        DhikrMorningWidgetProvider::class.java,
-        DhikrEveningWidgetProvider::class.java,
-        DhikrAfterPrayerWidgetProvider::class.java,
+        // 3. Adhkar Family (2)
+        DailyDhikrWidgetProvider::class.java,
         TasbeehCounterWidgetProvider::class.java,
-        TasbeehLargeCounterWidgetProvider::class.java,
-        DhikrLastCompletedWidgetProvider::class.java,
-        DhikrDailyPlanWidgetProvider::class.java,
-        DailyAchievementWidgetProvider::class.java,
 
-        // Qibla & Utilities Family (11)
-        QiblaDirectionWidgetProvider::class.java,
-        QiblaCompassWidgetProvider::class.java,
+        // 4. Qibla & Utilities Family (4)
+        QiblaWidgetProvider::class.java,
         HijriDateWidgetProvider::class.java,
-        CombinedDateWidgetProvider::class.java,
-        HijriTimeWidgetProvider::class.java,
-        WeatherPrayerWidgetProvider::class.java,
-        TravelPrayerStatusWidgetProvider::class.java,
-        CityTimezoneWidgetProvider::class.java,
         DailyWorshipPlanWidgetProvider::class.java,
-        TodaySummaryWidgetProvider::class.java,
         QuickShortcutsWidgetProvider::class.java
     )
 }

@@ -79,11 +79,13 @@ class WidgetConfigureActivity : ComponentActivity() {
             )
             WidgetUpdateCoordinator.updateAllWidgets(this@WidgetConfigureActivity)
 
-            val resultValue = Intent().apply {
-                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                val resultValue = Intent().apply {
+                    putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                }
+                setResult(Activity.RESULT_OK, resultValue)
+                finish()
             }
-            setResult(Activity.RESULT_OK, resultValue)
-            finish()
         }
     }
 }

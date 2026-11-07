@@ -240,10 +240,12 @@ class Phase6WidgetsAndWallpapersTest {
     }
 
     @Test
-    fun testAll44WidgetProvidersAreRegisteredInCoordinator() {
+    fun testAll15WidgetProvidersAreCuratedWithoutDuplicates() {
         val providers = WidgetUpdateCoordinator.allProviderClasses
-        assertTrue("Expected at least 35 widget providers, found: ${providers.size}", providers.size >= 35)
-        assertEquals(44, providers.size)
+        assertEquals(15, providers.size)
+        // Verify every provider is unique with zero duplicates
+        val uniqueClasses = providers.toSet()
+        assertEquals(15, uniqueClasses.size)
     }
 
     @Test

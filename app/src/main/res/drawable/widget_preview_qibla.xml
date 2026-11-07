@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="140dp"
+    android:viewportWidth="240"
+    android:viewportHeight="140">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H224 A12,12 0 0,1 236,16 V124 A12,12 0 0,1 224,136 H16 A12,12 0 0,1 4,124 V16 A12,12 0 0,1 16,4 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,18 H150 V26 H24 Z" />
+    <!-- Compass circle -->
+    <path
+        android:fillColor="#152B32"
+        android:strokeColor="#50D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M120,40 A36,36 0 1,0 120,112 A36,36 0 1,0 120,40 Z" />
+    <!-- Kaaba needle -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M120,48 L126,76 L120,72 L114,76 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M120,72 L126,76 L120,104 L114,76 Z" />
+    <!-- Distance text line -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,120 H170 V128 H70 Z" />
+</vector>

@@ -1,37 +1,25 @@
 package com.example.widgets
 
-// 13. آية اليوم
-class QuranAyahOfDayWidgetProvider : BaseIslamicWidgetProvider()
+// 6. آية اليوم وتدبر (4x2)
+class AyahOfTheDayWidgetProvider : BaseIslamicWidgetProvider()
+typealias QuranAyahOfDayWidgetProvider = AyahOfTheDayWidgetProvider
+typealias QuranLargeAyahWidgetProvider = AyahOfTheDayWidgetProvider
 
-// 14. آية اليوم بحجم كبير
-class QuranLargeAyahWidgetProvider : BaseIslamicWidgetProvider()
+// 7. متابعة قراءة القرآن والوصول السريع لآخر موضع (3x2)
+class LastReadingWidgetProvider : BaseIslamicWidgetProvider()
+typealias QuranLastReadWidgetProvider = LastReadingWidgetProvider
+typealias QuranResumeWidgetProvider = LastReadingWidgetProvider
 
-// 15. موضع القراءة الأخير
-class QuranLastReadWidgetProvider : BaseIslamicWidgetProvider()
+// 8. تقدم ختمة القرآن والورد اليومي (3x2)
+class QuranProgressWidgetProvider : BaseIslamicWidgetProvider()
+typealias QuranKhatmahProgressWidgetProvider = QuranProgressWidgetProvider
+typealias QuranDailyWirdWidgetProvider = QuranProgressWidgetProvider
+typealias QuranWirdRemainingWidgetProvider = QuranProgressWidgetProvider
+typealias QuranMemorizationReminderWidgetProvider = QuranProgressWidgetProvider
+typealias QuranMemorizationProgressWidgetProvider = QuranProgressWidgetProvider
 
-// 16. متابعة القراءة السريعة
-class QuranResumeWidgetProvider : BaseIslamicWidgetProvider()
-
-// 17. نسبة إنجاز الختمة
-class QuranKhatmahProgressWidgetProvider : BaseIslamicWidgetProvider()
-
-// 18. الورد القرآني اليومي
-class QuranDailyWirdWidgetProvider : BaseIslamicWidgetProvider()
-
-// 19. الصفحات المتبقية في الورد
-class QuranWirdRemainingWidgetProvider : BaseIslamicWidgetProvider()
-
-// 20. مشغل التلاوة الصوتي
-class QuranAudioPlayerWidgetProvider : BaseIslamicWidgetProvider()
-
-// 21. مشغل صوتي مصغر
-class QuranMiniPlayerWidgetProvider : BaseIslamicWidgetProvider()
-
-// 22. السورة المستمع إليها
-class QuranCurrentSurahWidgetProvider : BaseIslamicWidgetProvider()
-
-// 23. تذكير مراجعة الحفظ
-class QuranMemorizationReminderWidgetProvider : BaseIslamicWidgetProvider()
-
-// 24. نسبة تقدم الحفظ الكلي
-class QuranMemorizationProgressWidgetProvider : BaseIslamicWidgetProvider()
+// 9. مشغل القرآن الكريم (3x2)
+class QuranPlayerWidgetProvider : BaseIslamicWidgetProvider()
+typealias QuranAudioPlayerWidgetProvider = QuranPlayerWidgetProvider
+typealias QuranMiniPlayerWidgetProvider = QuranPlayerWidgetProvider
+typealias QuranCurrentSurahWidgetProvider = QuranPlayerWidgetProvider

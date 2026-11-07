@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="260dp"
+    android:height="70dp"
+    android:viewportWidth="260"
+    android:viewportHeight="70">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.2"
+        android:pathData="M12,4 H248 A8,8 0 0,1 256,12 V58 A8,8 0 0,1 248,66 H12 A8,8 0 0,1 4,58 V12 A8,8 0 0,1 12,4 Z" />
+    <!-- 4 circle shortcut buttons with icons -->
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M38,15 A18,18 0 1,0 38,51 A18,18 0 1,0 38,15 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M32,27 H44 V39 H32 Z" />
+
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M98,15 A18,18 0 1,0 98,51 A18,18 0 1,0 98,15 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M92,27 H104 V39 H92 Z" />
+
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M158,15 A18,18 0 1,0 158,51 A18,18 0 1,0 158,15 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M152,27 H164 V39 H152 Z" />
+
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M218,15 A18,18 0 1,0 218,51 A18,18 0 1,0 218,15 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M212,27 H224 V39 H212 Z" />
+</vector>

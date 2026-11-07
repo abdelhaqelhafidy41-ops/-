@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="140dp"
+    android:viewportWidth="240"
+    android:viewportHeight="140">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H224 A12,12 0 0,1 236,16 V124 A12,12 0 0,1 224,136 H16 A12,12 0 0,1 4,124 V16 A12,12 0 0,1 16,4 Z" />
+    <!-- Crescent Moon decoration -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M34,22 C30,22 26,25 25,29 C24,33 26,38 30,40 C27,39 24,35 24,31 C24,26 28,22 34,22 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M44,22 H190 V30 H44 Z" />
+    <!-- Two boxes: Imsak & Iftar -->
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M18,44 H114 V94 H18 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M30,52 H80 V60 H30 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,70 H100 V84 H30 Z" />
+
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M126,44 H222 V94 H126 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M138,52 H198 V60 H138 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M138,70 H210 V84 H138 Z" />
+
+    <path
+        android:fillColor="#80D4AF37"
+        android:pathData="M40,110 H200 V122 H40 Z" />
+</vector>

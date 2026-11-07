@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="130dp"
+    android:viewportWidth="240"
+    android:viewportHeight="130">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H224 A12,12 0 0,1 236,16 V114 A12,12 0 0,1 224,126 H16 A12,12 0 0,1 4,114 V16 A12,12 0 0,1 16,4 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,16 H140 V24 H24 Z" />
+    <!-- Phrase text -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,34 H140 V46 H24 Z" />
+    <!-- Count display -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,56 H100 V80 H24 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M24,86 H90 V94 H24 Z" />
+    <!-- Tasbeeh +1 circle button -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M185,38 A28,28 0 1,0 185,94 A28,28 0 1,0 185,38 Z" />
+    <path
+        android:fillColor="#0B1A1E"
+        android:pathData="M178,63 H192 V69 H178 Z M182,59 H188 V73 H182 Z" />
+    <!-- Reset icon small button -->
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M140,56 A12,12 0 1,0 140,80 A12,12 0 1,0 140,56 Z" />
+</vector>

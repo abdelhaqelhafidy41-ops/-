@@ -1,0 +1,34 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="120dp"
+    android:viewportWidth="240"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H224 A12,12 0 0,1 236,16 V104 A12,12 0 0,1 224,116 H16 A12,12 0 0,1 4,104 V16 A12,12 0 0,1 16,4 Z" />
+    <!-- Bookmark header -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,16 H140 V24 H24 Z" />
+    <!-- Surah Name -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,36 H120 V52 H24 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M24,58 H110 V66 H24 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M24,72 H90 V80 H24 Z" />
+    <!-- Resume Button -->
+    <path
+        android:fillColor="#152B32"
+        android:strokeColor="#50D4AF37"
+        android:strokeWidth="1"
+        android:pathData="M140,40 H220 A8,8 0 0,1 228,48 V76 A8,8 0 0,1 220,84 H140 A8,8 0 0,1 132,76 V48 A8,8 0 0,1 140,40 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M150,56 H210 V68 H150 Z" />
+</vector>

@@ -7,7 +7,7 @@ import android.content.Context
 open class BaseIslamicWidgetProvider : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
-        WidgetUpdateCoordinator.updateAllWidgets(context)
+        WidgetUpdateCoordinator.updateWidgetIds(context, appWidgetManager, appWidgetIds, this::class.java)
     }
 
     override fun onEnabled(context: Context) {
@@ -16,38 +16,27 @@ open class BaseIslamicWidgetProvider : AppWidgetProvider() {
     }
 }
 
-// 1. الصلاة القادمة
-class PrayerNextWidgetProvider : BaseIslamicWidgetProvider()
+// 1. الصلاة القادمة والعد التنازلي (3x2)
+class NextPrayerWidgetProvider : BaseIslamicWidgetProvider()
+typealias PrayerNextWidgetProvider = NextPrayerWidgetProvider
+typealias PrayerCountdownWidgetProvider = NextPrayerWidgetProvider
+typealias PrayerFajrCountdownWidgetProvider = NextPrayerWidgetProvider
+typealias PrayerHighlightCurrentWidgetProvider = NextPrayerWidgetProvider
 
-// 2. العد التنازلي للصلاة القادمة
-class PrayerCountdownWidgetProvider : BaseIslamicWidgetProvider()
-
-// 3. مواقيت الصلاة اليومية الكاملة
+// 2. مواقيت الصلاة اليومية الكاملة (4x2)
 class PrayerTimesDailyWidgetProvider : BaseIslamicWidgetProvider()
+typealias PrayerTomorrowWidgetProvider = PrayerTimesDailyWidgetProvider
 
-// 4. ويدجت مصغر للصلاة
+// 3. ويدجت مصغر للصلاة القادمة (2x1)
 class PrayerMiniWidgetProvider : BaseIslamicWidgetProvider()
+typealias PrayerAdhanToggleWidgetProvider = PrayerMiniWidgetProvider
 
-// 5. العد التنازلي لصلاة الفجر
-class PrayerFajrCountdownWidgetProvider : BaseIslamicWidgetProvider()
+// 4. الفجر والشروق / الصلوات الثنائية (3x1)
+class PrayerPairWidgetProvider : BaseIslamicWidgetProvider()
+typealias PrayerFajrSunriseWidgetProvider = PrayerPairWidgetProvider
+typealias PrayerDhuhrAsrWidgetProvider = PrayerPairWidgetProvider
+typealias PrayerMaghribIshaWidgetProvider = PrayerPairWidgetProvider
 
-// 6. الصلاة الحالية مع التمييز
-class PrayerHighlightCurrentWidgetProvider : BaseIslamicWidgetProvider()
-
-// 7. الفجر والشروق
-class PrayerFajrSunriseWidgetProvider : BaseIslamicWidgetProvider()
-
-// 8. الظهر والعصر
-class PrayerDhuhrAsrWidgetProvider : BaseIslamicWidgetProvider()
-
-// 9. المغرب والعشاء
-class PrayerMaghribIshaWidgetProvider : BaseIslamicWidgetProvider()
-
-// 10. مواقيت صلاة الغد
-class PrayerTomorrowWidgetProvider : BaseIslamicWidgetProvider()
-
-// 11. إمساك وإفطار رمضان
-class PrayerRamadanImsakIftarWidgetProvider : BaseIslamicWidgetProvider()
-
-// 12. حالة الأذان والتنبيهات
-class PrayerAdhanToggleWidgetProvider : BaseIslamicWidgetProvider()
+// 5. إمساك وإفطار رمضان (3x2)
+class RamadanPrayerWidgetProvider : BaseIslamicWidgetProvider()
+typealias PrayerRamadanImsakIftarWidgetProvider = RamadanPrayerWidgetProvider

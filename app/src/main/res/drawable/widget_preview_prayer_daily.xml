@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="260dp"
+    android:height="130dp"
+    android:viewportWidth="260"
+    android:viewportHeight="130">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H244 A12,12 0 0,1 256,16 V114 A12,12 0 0,1 244,126 H16 A12,12 0 0,1 4,114 V16 A12,12 0 0,1 16,4 Z" />
+    <!-- Header -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,16 H150 V26 H24 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M180,18 H236 V25 H180 Z" />
+    <!-- 5 Prayer columns / cards -->
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M18,40 H60 V90 H18 Z" />
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M65,40 H107 V90 H65 Z" />
+    <path
+        android:fillColor="#1B3942"
+        android:pathData="M112,40 H154 V90 H112 Z" />
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M159,40 H201 V90 H159 Z" />
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M206,40 H248 V90 H206 Z" />
+    <!-- Text lines in columns -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,48 H54 V56 H24 Z M71,48 H101 V56 H71 Z M118,48 H148 V56 H118 Z M165,48 H195 V56 H165 Z M212,48 H242 V56 H212 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,66 H54 V74 H24 Z M71,66 H101 V74 H71 Z M118,66 H148 V74 H118 Z M165,66 H195 V74 H165 Z M212,66 H242 V74 H212 Z" />
+    <!-- Footer -->
+    <path
+        android:fillColor="#40E5C07B"
+        android:pathData="M40,102 H220 V114 H40 Z" />
+</vector>

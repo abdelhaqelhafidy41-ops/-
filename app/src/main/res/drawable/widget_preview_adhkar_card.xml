@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="130dp"
+    android:viewportWidth="240"
+    android:viewportHeight="130">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H224 A12,12 0 0,1 236,16 V114 A12,12 0 0,1 224,126 H16 A12,12 0 0,1 4,114 V16 A12,12 0 0,1 16,4 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,16 H130 V26 H24 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M180,18 H224 V25 H180 Z" />
+    <!-- Dhikr Arabic text lines -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,42 H224 V52 H24 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,60 H212 V70 H36 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,78 H190 V88 H50 Z" />
+    <!-- Reward & Reference Footer -->
+    <path
+        android:fillColor="#80D4AF37"
+        android:pathData="M30,102 H210 V114 H30 Z" />
+</vector>

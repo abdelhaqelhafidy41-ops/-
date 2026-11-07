@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="130dp"
+    android:viewportWidth="240"
+    android:viewportHeight="130">
+    <path
+        android:fillColor="#0B1A1E"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:pathData="M16,4 H224 A12,12 0 0,1 236,16 V114 A12,12 0 0,1 224,126 H16 A12,12 0 0,1 4,114 V16 A12,12 0 0,1 16,4 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,16 H140 V24 H24 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M190,16 H224 V28 H190 Z" />
+    <!-- Progress bar track -->
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M24,40 H224 V48 H24 Z" />
+    <!-- Progress bar fill -->
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M24,40 H140 V48 H24 Z" />
+    <!-- Wird cards -->
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M24,62 H114 V108 H24 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M34,70 H80 V78 H34 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,86 H100 V98 H34 Z" />
+
+    <path
+        android:fillColor="#152B32"
+        android:pathData="M134,62 H224 V108 H134 Z" />
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M144,70 H190 V78 H144 Z" />
+    <path
+        android:fillColor="#E5C07B"
+        android:pathData="M144,86 H210 V98 H144 Z" />
+</vector>

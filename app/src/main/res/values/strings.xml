@@ -105,4 +105,50 @@
     <string name="nav_wallpapers">الخلفيات الإسلامية</string>
     <string name="wallpapers_subtitle">خلفيات موثقة عالية الدقة ومجانية</string>
     <string name="widgets_title">الويدجت الإسلامية</string>
+
+    <!-- Distinct Widget Names & Descriptions -->
+    <string name="widget_name_next_prayer">الصلاة القادمة والعد التنازلي</string>
+    <string name="widget_desc_next_prayer">عرض الصلاة القادمة والوقت المتبقي لها مع المدينة والتاريخ الهجري</string>
+
+    <string name="widget_name_prayer_daily">مواقيت الصلاة اليومية</string>
+    <string name="widget_desc_prayer_daily">جدول مواقيت الصلوات الخمس مع الشروق ومؤشر الصلاة القادمة</string>
+
+    <string name="widget_name_prayer_mini">مواقيت الصلاة (مصغر)</string>
+    <string name="widget_desc_prayer_mini">ويدجت شريطي مدمج يعرض اسم الصلاة القادمة ووقتها بدقة</string>
+
+    <string name="widget_name_prayer_pair">الفجر والشروق</string>
+    <string name="widget_desc_prayer_pair">مواقيت صلاة الفجر ووقت الشروق لضبط الاستيقاظ والتهجد</string>
+
+    <string name="widget_name_ramadan_prayer">إمساكية رمضان والإفطار</string>
+    <string name="widget_desc_ramadan_prayer">وقت الإمساك ووقت الإفطار والعد التنازلي لأذان المغرب</string>
+
+    <string name="widget_name_qibla">اتجاه القبلة والمسافة</string>
+    <string name="widget_desc_qibla">درجة انحراف القبلة والمسافة المباشرة إلى الكعبة المشرفة بمكة المكرمة</string>
+
+    <string name="widget_name_ayah_of_day">آية اليوم وتدبر</string>
+    <string name="widget_desc_ayah_of_day">آية قرآنية مختارة يومياً مع اسم السورة ورقم الآية للتدبر والعمل</string>
+
+    <string name="widget_name_last_reading">متابعة قراءة القرآن</string>
+    <string name="widget_desc_last_reading">موضع آخر قراءة توقفت عندها مع زر متابعة فوري يفتح السورة مباشرة</string>
+
+    <string name="widget_name_quran_progress">تقدم ختمة القرآن</string>
+    <string name="widget_desc_quran_progress">نسبة إتمام الختمة وعدد الصفحات المقروءة والورد القرآني اليومي</string>
+
+    <string name="widget_name_quran_player">مشغل القرآن الكريم</string>
+    <string name="widget_desc_quran_player">التحكم في الاستماع للتلاوات القرآنية مع زر تشغيل وإيقاف مباشر</string>
+
+    <string name="widget_name_daily_dhikr">ذكر اليوم المأثور</string>
+    <string name="widget_desc_daily_dhikr">ذكر نبوي ودعاء مأثور متجدد يومياً من حصن المسلم مع الفضل والسند</string>
+
+    <string name="widget_name_tasbeeh">السبحة الإلكترونية التفاعلية</string>
+    <string name="widget_desc_tasbeeh">سبحة تفاعلية لذكر الله على الشاشة الرئيسية مع زر زيادة وتصفير فوري</string>
+
+    <string name="widget_name_hijri_date">التاريخ والتقويم الهجري</string>
+    <string name="widget_desc_hijri_date">اليوم والتاريخ الهجري والميلادي معاً بتصميم إسلامي هادئ</string>
+
+    <string name="widget_name_worship_plan">خطة العبادة والزاد اليومي</string>
+    <string name="widget_desc_worship_plan">ملخص الصلوات المكتملة وعدد التسبيحات وورد التلاوة وسلسلة الالتزام</string>
+
+    <string name="widget_name_quick_shortcuts">اختصارات نور المسلم</string>
+    <string name="widget_desc_quick_shortcuts">أزرار وصول سريع إلى المصحف الشريف، الأذكار، الصلاة، والقبلة</string>
 </resources>

@@ -90,226 +90,142 @@
             </intent-filter>
         </receiver>
 
-        <!-- 1. Prayer Family Widgets -->
-        <receiver android:name=".widgets.PrayerNextWidgetProvider" android:exported="true">
+        <!-- Curated 15 Distinct App Widgets (Phase 8 Clean Architecture) -->
+        <!-- 1. Prayer Family -->
+        <receiver
+            android:name=".widgets.NextPrayerWidgetProvider"
+            android:label="@string/widget_name_next_prayer"
+            android:description="@string/widget_desc_next_prayer"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_next_info" />
         </receiver>
 
-        <receiver android:name=".widgets.PrayerCountdownWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_next_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.PrayerTimesDailyWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.PrayerTimesDailyWidgetProvider"
+            android:label="@string/widget_name_prayer_daily"
+            android:description="@string/widget_desc_prayer_daily"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_daily_info" />
         </receiver>
 
-        <receiver android:name=".widgets.PrayerMiniWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.PrayerMiniWidgetProvider"
+            android:label="@string/widget_name_prayer_mini"
+            android:description="@string/widget_desc_prayer_mini"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_mini_info" />
         </receiver>
 
-        <receiver android:name=".widgets.PrayerFajrCountdownWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_next_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.PrayerHighlightCurrentWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_next_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.PrayerFajrSunriseWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.PrayerPairWidgetProvider"
+            android:label="@string/widget_name_prayer_pair"
+            android:description="@string/widget_desc_prayer_pair"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_pair_info" />
         </receiver>
 
-        <receiver android:name=".widgets.PrayerDhuhrAsrWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.RamadanPrayerWidgetProvider"
+            android:label="@string/widget_name_ramadan_prayer"
+            android:description="@string/widget_desc_ramadan_prayer"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_pair_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_ramadan_prayer_info" />
         </receiver>
 
-        <receiver android:name=".widgets.PrayerMaghribIshaWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_pair_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.PrayerTomorrowWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_daily_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.PrayerRamadanImsakIftarWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_pair_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.PrayerAdhanToggleWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_prayer_mini_info" />
-        </receiver>
-
-        <!-- 2. Quran Family Widgets -->
-        <receiver android:name=".widgets.QuranAyahOfDayWidgetProvider" android:exported="true">
+        <!-- 2. Quran Family -->
+        <receiver
+            android:name=".widgets.AyahOfTheDayWidgetProvider"
+            android:label="@string/widget_name_ayah_of_day"
+            android:description="@string/widget_desc_ayah_of_day"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_ayah_info" />
         </receiver>
 
-        <receiver android:name=".widgets.QuranLargeAyahWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_ayah_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranLastReadWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_last_read_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranResumeWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.LastReadingWidgetProvider"
+            android:label="@string/widget_name_last_reading"
+            android:description="@string/widget_desc_last_reading"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_last_read_info" />
         </receiver>
 
-        <receiver android:name=".widgets.QuranKhatmahProgressWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.QuranProgressWidgetProvider"
+            android:label="@string/widget_name_quran_progress"
+            android:description="@string/widget_desc_quran_progress"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_khatmah_info" />
         </receiver>
 
-        <receiver android:name=".widgets.QuranDailyWirdWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_khatmah_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranWirdRemainingWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_khatmah_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranAudioPlayerWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.QuranPlayerWidgetProvider"
+            android:label="@string/widget_name_quran_player"
+            android:description="@string/widget_desc_quran_player"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_player_info" />
         </receiver>
 
-        <receiver android:name=".widgets.QuranMiniPlayerWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_player_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranCurrentSurahWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_player_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranMemorizationReminderWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_khatmah_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.QuranMemorizationProgressWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quran_khatmah_info" />
-        </receiver>
-
-        <!-- 3. Adhkar & Tasbeeh Family Widgets -->
-        <receiver android:name=".widgets.DhikrOfDayWidgetProvider" android:exported="true">
+        <!-- 3. Adhkar Family -->
+        <receiver
+            android:name=".widgets.DailyDhikrWidgetProvider"
+            android:label="@string/widget_name_daily_dhikr"
+            android:description="@string/widget_desc_daily_dhikr"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
         </receiver>
 
-        <receiver android:name=".widgets.DhikrMorningWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.DhikrEveningWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.DhikrAfterPrayerWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.TasbeehCounterWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.TasbeehCounterWidgetProvider"
+            android:label="@string/widget_name_tasbeeh"
+            android:description="@string/widget_desc_tasbeeh"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_tasbeeh_info" />
         </receiver>
 
-        <receiver android:name=".widgets.TasbeehLargeCounterWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_tasbeeh_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.DhikrLastCompletedWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.DhikrDailyPlanWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.DailyAchievementWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_adhkar_card_info" />
-        </receiver>
-
-        <!-- 4. Qibla & Utilities Family Widgets -->
-        <receiver android:name=".widgets.QiblaDirectionWidgetProvider" android:exported="true">
+        <!-- 4. Utilities & Essentials Family -->
+        <receiver
+            android:name=".widgets.QiblaWidgetProvider"
+            android:label="@string/widget_name_qibla"
+            android:description="@string/widget_desc_qibla"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_qibla_info" />
         </receiver>
 
-        <receiver android:name=".widgets.QiblaCompassWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_qibla_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.HijriDateWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.CombinedDateWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.HijriDateWidgetProvider"
+            android:label="@string/widget_name_hijri_date"
+            android:description="@string/widget_desc_hijri_date"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
         </receiver>
 
-        <receiver android:name=".widgets.HijriTimeWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.WeatherPrayerWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.TravelPrayerStatusWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.CityTimezoneWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.DailyWorshipPlanWidgetProvider" android:exported="true">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_hijri_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.TodaySummaryWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.DailyWorshipPlanWidgetProvider"
+            android:label="@string/widget_name_worship_plan"
+            android:description="@string/widget_desc_worship_plan"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_summary_info" />
         </receiver>
 
-        <receiver android:name=".widgets.QuickShortcutsWidgetProvider" android:exported="true">
+        <receiver
+            android:name=".widgets.QuickShortcutsWidgetProvider"
+            android:label="@string/widget_name_quick_shortcuts"
+            android:description="@string/widget_desc_quick_shortcuts"
+            android:exported="true">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_shortcuts_info" />
         </receiver>

@@ -1,28 +1,15 @@
 package com.example.widgets
 
-// 25. ذكر اليوم والفضيلة
-class DhikrOfDayWidgetProvider : BaseIslamicWidgetProvider()
+// 10. ذكر اليوم المأثور وحصن المسلم (3x2)
+class DailyDhikrWidgetProvider : BaseIslamicWidgetProvider()
+typealias DhikrOfDayWidgetProvider = DailyDhikrWidgetProvider
+typealias DhikrMorningWidgetProvider = DailyDhikrWidgetProvider
+typealias DhikrEveningWidgetProvider = DailyDhikrWidgetProvider
+typealias DhikrAfterPrayerWidgetProvider = DailyDhikrWidgetProvider
+typealias DhikrLastCompletedWidgetProvider = DailyDhikrWidgetProvider
+typealias DhikrDailyPlanWidgetProvider = DailyDhikrWidgetProvider
+typealias DailyAchievementWidgetProvider = DailyDhikrWidgetProvider
 
-// 26. أذكار الصباح
-class DhikrMorningWidgetProvider : BaseIslamicWidgetProvider()
-
-// 27. أذكار المساء
-class DhikrEveningWidgetProvider : BaseIslamicWidgetProvider()
-
-// 28. أذكار ما بعد الصلاة
-class DhikrAfterPrayerWidgetProvider : BaseIslamicWidgetProvider()
-
-// 29. المسبحة الإلكترونية التفاعلية (+1 وتصفير)
+// 11. السبحة الإلكترونية التفاعلية (+1 وتصفير) (3x2)
 class TasbeehCounterWidgetProvider : BaseIslamicWidgetProvider()
-
-// 30. المسبحة الإلكترونية الكبيرة
-class TasbeehLargeCounterWidgetProvider : BaseIslamicWidgetProvider()
-
-// 31. آخر ذكر تم إنجازه
-class DhikrLastCompletedWidgetProvider : BaseIslamicWidgetProvider()
-
-// 32. خطة الأذكار اليومية
-class DhikrDailyPlanWidgetProvider : BaseIslamicWidgetProvider()
-
-// 33. إنجاز اليوم والعبادات
-class DailyAchievementWidgetProvider : BaseIslamicWidgetProvider()
+typealias TasbeehLargeCounterWidgetProvider = TasbeehCounterWidgetProvider
