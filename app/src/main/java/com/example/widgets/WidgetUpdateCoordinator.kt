@@ -39,8 +39,10 @@ object WidgetUpdateCoordinator {
                 RemoteViews(context.packageName, R.layout.widget_prayer_daily)
             "PrayerMiniWidgetProvider", "PrayerAdhanToggleWidgetProvider" ->
                 RemoteViews(context.packageName, R.layout.widget_prayer_mini)
-            "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider", "RamadanPrayerWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" ->
+            "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider" ->
                 RemoteViews(context.packageName, R.layout.widget_prayer_pair)
+            "RamadanPrayerWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" ->
+                RemoteViews(context.packageName, R.layout.widget_ramadan)
             "AyahOfTheDayWidgetProvider", "QuranAyahOfDayWidgetProvider", "QuranLargeAyahWidgetProvider" ->
                 RemoteViews(context.packageName, R.layout.widget_quran_ayah)
             "LastReadingWidgetProvider", "QuranLastReadWidgetProvider", "QuranResumeWidgetProvider" ->
@@ -254,7 +256,7 @@ object WidgetUpdateCoordinator {
                 views
             }
 
-            "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider", "RamadanPrayerWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" -> {
+            "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider", "PrayerDhuhrAsrWidgetProvider", "PrayerMaghribIshaWidgetProvider" -> {
                 val views = RemoteViews(context.packageName, R.layout.widget_prayer_pair)
                 when (providerClass.simpleName) {
                     "PrayerPairWidgetProvider", "PrayerFajrSunriseWidgetProvider" -> {
@@ -269,19 +271,25 @@ object WidgetUpdateCoordinator {
                         views.setTextViewText(R.id.tv_pair_label2, "العصر 🌤️")
                         views.setTextViewText(R.id.tv_pair_time2, timeFormat12.format(todaySchedule.asr))
                     }
-                    "PrayerMaghribIshaWidgetProvider" -> {
+                    else -> { // PrayerMaghribIshaWidgetProvider
                         views.setTextViewText(R.id.tv_pair_label1, "المغرب 🌇")
                         views.setTextViewText(R.id.tv_pair_time1, timeFormat12.format(todaySchedule.maghrib))
                         views.setTextViewText(R.id.tv_pair_label2, "العشاء 🌌")
                         views.setTextViewText(R.id.tv_pair_time2, timeFormat12.format(todaySchedule.isha))
                     }
-                    else -> { // Ramadan Imsak & Iftar
-                        views.setTextViewText(R.id.tv_pair_label1, "الإمساك 🌙")
-                        views.setTextViewText(R.id.tv_pair_time1, timeFormat12.format(todaySchedule.fajr))
-                        views.setTextViewText(R.id.tv_pair_label2, "الإفطار 🌴")
-                        views.setTextViewText(R.id.tv_pair_time2, timeFormat12.format(todaySchedule.maghrib))
-                    }
                 }
+                views.setOnClickPendingIntent(R.id.widget_root, createNavigationIntent(context, "prayer"))
+                views
+            }
+
+            "RamadanPrayerWidgetProvider", "PrayerRamadanImsakIftarWidgetProvider" -> {
+                val views = RemoteViews(context.packageName, R.layout.widget_ramadan)
+                views.setTextViewText(R.id.tv_ramadan_title, "إمساكية رمضان المبارك 🌙")
+                views.setTextViewText(R.id.tv_ramadan_city, cityName)
+                views.setTextViewText(R.id.tv_imsak_time, timeFormat12.format(todaySchedule.fajr))
+                views.setTextViewText(R.id.tv_iftar_time, timeFormat12.format(todaySchedule.maghrib))
+                val countdownIftar = (todaySchedule.maghrib.time - System.currentTimeMillis()).coerceAtLeast(0)
+                views.setTextViewText(R.id.tv_ramadan_footer, "متبقي للإفطار: ${formatRemaining(countdownIftar)}")
                 views.setOnClickPendingIntent(R.id.widget_root, createNavigationIntent(context, "prayer"))
                 views
             }

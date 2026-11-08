@@ -68,16 +68,13 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="4dp"
-            android:layout_height="match_parent" />
-
         <!-- Dhuhr -->
         <LinearLayout
             android:id="@+id/layout_dhuhr"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:background="@drawable/widget_card_item"
             android:gravity="center"
             android:orientation="vertical"
@@ -101,16 +98,13 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="4dp"
-            android:layout_height="match_parent" />
-
         <!-- Asr -->
         <LinearLayout
             android:id="@+id/layout_asr"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:background="@drawable/widget_card_item"
             android:gravity="center"
             android:orientation="vertical"
@@ -134,16 +128,13 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="4dp"
-            android:layout_height="match_parent" />
-
         <!-- Maghrib -->
         <LinearLayout
             android:id="@+id/layout_maghrib"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:background="@drawable/widget_card_item"
             android:gravity="center"
             android:orientation="vertical"
@@ -167,16 +158,13 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="4dp"
-            android:layout_height="match_parent" />
-
         <!-- Isha -->
         <LinearLayout
             android:id="@+id/layout_isha"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:background="@drawable/widget_card_item"
             android:gravity="center"
             android:orientation="vertical"

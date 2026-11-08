@@ -61,7 +61,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="1dp"
             android:layout_height="24dp"
             android:background="#20FFFFFF" />
@@ -90,7 +90,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="1dp"
             android:layout_height="24dp"
             android:background="#20FFFFFF" />
@@ -124,6 +124,7 @@
         android:id="@+id/tv_summary_tip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="«أحب الأعمال إلى الله أدومها وإن قل»"
         android:textColor="@color/widget_text_secondary"

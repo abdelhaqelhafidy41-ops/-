@@ -19,7 +19,7 @@
 | **2** | مواقيت الصلاة | مواقيت الصلاة اليومية | `PrayerTimesDailyWidgetProvider` | `widget_prayer_daily_info.xml` | **4 × 2** (300×110 dp) | `widget_prayer_daily.xml` | `widget_preview_prayer_daily.xml` | جدول كامل للصلوات الخمس (الفجر، الظهر، العصر، المغرب، العشاء) مع تمييز الصلاة القادمة. |
 | **3** | مواقيت الصلاة | مواقيت الصلاة (مصغر) | `PrayerMiniWidgetProvider` | `widget_prayer_mini_info.xml` | **2 × 1** (150×50 dp) | `widget_prayer_mini.xml` | `widget_preview_prayer_mini.xml` | شريط أفقي فائق النحافة يعرض اسم الصلاة ووقتها، مثالي للشاشات المزدحمة. |
 | **4** | مواقيت الصلاة | الفجر والشروق | `PrayerPairWidgetProvider` | `widget_prayer_pair_info.xml` | **3 × 1** (250×60 dp) | `widget_prayer_pair.xml` | `widget_preview_prayer_pair.xml` | عرض ثنائي لموعد أذان الفجر ووقت الشروق للمساعدة في ضبط قيام الليل والاستيقاظ. |
-| **5** | مواقيت الصلاة | إمساكية رمضان والإفطار | `RamadanPrayerWidgetProvider` | `widget_ramadan_prayer_info.xml` | **3 × 2** (250×110 dp) | `widget_prayer_pair.xml` | `widget_preview_ramadan.xml` | بطاقة خاصة بوقت الإمساك ووقت الإفطار ومواقيت السحور خلال شهر رمضان المبارك وصيام النوافل. |
+| **5** | مواقيت الصلاة | إمساكية رمضان والإفطار | `RamadanPrayerWidgetProvider` | `widget_ramadan_prayer_info.xml` | **3 × 2** (250×110 dp) | `widget_ramadan.xml` | `widget_preview_ramadan.xml` | بطاقة مخصصة مستقلة لوقت الإمساك ووقت الإفطار ومواقيت السحور مع العداد التنازلي للإفطار. |
 | **6** | القرآن الكريم | آية اليوم وتدبر | `AyahOfTheDayWidgetProvider` | `widget_quran_ayah_info.xml` | **4 × 2** (320×120 dp) | `widget_quran_ayah.xml` | `widget_preview_quran_ayah.xml` | آية قرآنية يومية مختارة بالرسم العثماني مع اسم السورة ورقم الآية وتوجيه للتدبر والعمل. |
 | **7** | القرآن الكريم | متابعة قراءة القرآن | `LastReadingWidgetProvider` | `widget_quran_last_read_info.xml` | **3 × 2** (250×110 dp) | `widget_quran_last_read.xml` | `widget_preview_quran_last_read.xml` | موضع آخر قراءة توقف عندها المستخدم (اسم السورة، رقم الآية، والصفحة) مع زر «متابعة ⬅» فوري. |
 | **8** | القرآن الكريم | تقدم ختمة القرآن | `QuranProgressWidgetProvider` | `widget_quran_khatmah_info.xml` | **3 × 2** (250×110 dp) | `widget_quran_khatmah.xml` | `widget_preview_quran_khatmah.xml` | شريط تقدم مرئي للختمة القرآنية النشطة، نسبة الإنجاز المئوية، والمتبقي من الورد اليومي. |
@@ -68,11 +68,19 @@
 
 ---
 
-### 4. أسباب وحلول خطأ "Couldn't add widget"
-* **السبب الأول:** كانت ملفات `widget_*_info.xml` تحتوي على سمة `android:configure` التي توجه أندرويد لفتح نافذة إعداد قبل تثبيت الويدجت. إذا لم تنتهِ النافذة بنجاح أو لم ترسل نتيجة `RESULT_OK` متزامنة مع معرف الويدجت `EXTRA_APPWIDGET_ID`، يقوم المشغل فوراً بإلغاء الإضافة وعرض خطأ `Couldn't add widget.`.
-  * **الحل:** تم إزالة `android:configure` من جميع الويدجت المستقلة، فأصبح بإمكان المستخدم وضعها مباشرة على الشاشة دون أي خطوات إضافية.
-* **السبب الثاني:** كان تحديث الويدجت يتم بالكامل عبر مهام غير متزامنة (Background Coroutines) داخل `Dispatchers.IO`، مما كان يتسبب في تأخر استجابة `RemoteViews` عن المهلة التي يحددها المشغل.
-  * **الحل:** تنفيذ دالة `getInitialFastViews` المتزامنة داخل `WidgetUpdateCoordinator`، والتي تمد المشغل فوراً بواجهة أولية مطابقة خلال أجزاء من الثانية، ثم تقوم الكوروتين بتحديث المحتوى بالبيانات الحية المأخوذة من قاعدة البيانات ومواقيت الصلاة.
+### 4. أسباب وحلول خطأ "Couldn't add widget" و "Can't load widget"
+* **السبب الجذري لرسالة "Can't load widget" في قائمة المعاينة (Launcher Picker):**
+  * يقوم نظام أندرويد (API 31+) في قائمة اختيار الويدجت بمحاولة بناء المعاينة التفاعلية المباشرة عبر `android:previewLayout`.
+  * تحتوي واجهات أندرويد لـ `RemoteViews` على قائمة بيضاء صارمة ومحدودة جداً من وسوم XML المسموح بها. استخدام وسوم غير مدعومة مثل `<Space>` يؤدي إلى رمي استثناء نظام فوري: `InflateException: Class not allowed to be inflated android.widget.Space`.
+  * كانت الويدجت الثلاث التي ظهرت في لقطات الشاشة (`الفجر والشروق 3×1`، `اختصارات نور المسلم 4×1`، و`مواقيت الصلاة اليومية 4×2`) تحتوي جميعاً على وسوم `<Space>`.
+  * **الحل:** تم استبدال جميع وسوم `<Space>` بهوامش مباشرة `android:layout_marginStart` ضمن عناصر `LinearLayout`، واستبدال فواصل `<View>` بـ `<FrameLayout>`، مما جعل كافة ملفات التخطيط متوافقة بنسبة 100% مع معايير `RemoteViews` على جميع إصدارات أندرويد، واختفت رسالة "Can't load widget" نهائياً.
+
+* **حل مشكلة الإضافة "Couldn't add widget":**
+  * تم إلغاء شاشات التكوين الإجبارية وإزالة سمة `android:configure` لتمكين الإضافة المباشرة بالسحب والإفلات.
+  * توفير واجهات فورية سريعة `getInitialFastViews` متزامنة بحيث لا ينتظر المشغل استعلامات قاعدة البيانات أو الحسابات الفلكية.
+
+* **حل مشكلة التكرار المظهري بين الصلاة القادمة وإمساكية رمضان:**
+  * تم إنشاء ملف تخطيط مخصص كلياً `widget_ramadan.xml` لإمساكية رمضان يعرض بطاقتين متجاورتين للإمساك والإفطار مع هلال رمضان، ليفترق مظهره بالكامل عن ويدجت "الصلاة القادمة والعد التنازلي".
 
 ---
 

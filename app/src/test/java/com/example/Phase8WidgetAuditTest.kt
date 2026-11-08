@@ -109,4 +109,31 @@ class Phase8WidgetAuditTest {
             assertTrue("String resource must not be empty", str.isNotBlank())
         }
     }
+
+    @Test
+    fun testAll15WidgetLayoutsInflateCleanlyWithoutUnsupportedViews() {
+        val layoutIds = listOf(
+            R.layout.widget_prayer_next,
+            R.layout.widget_prayer_daily,
+            R.layout.widget_prayer_mini,
+            R.layout.widget_prayer_pair,
+            R.layout.widget_ramadan,
+            R.layout.widget_quran_ayah,
+            R.layout.widget_quran_last_read,
+            R.layout.widget_quran_khatmah,
+            R.layout.widget_quran_player,
+            R.layout.widget_adhkar_card,
+            R.layout.widget_adhkar_tasbeeh,
+            R.layout.widget_qibla,
+            R.layout.widget_date_hijri,
+            R.layout.widget_summary,
+            R.layout.widget_shortcuts
+        )
+
+        val inflater = android.view.LayoutInflater.from(context)
+        for (layoutId in layoutIds) {
+            val view = inflater.inflate(layoutId, null)
+            assertNotNull("Layout resource $layoutId must inflate successfully without errors", view)
+        }
+    }
 }
